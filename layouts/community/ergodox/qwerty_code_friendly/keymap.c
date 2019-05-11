@@ -17,10 +17,10 @@
 /* #define CFQ_USE_80_KEYS */
 
 /** Personal preference (enable by passing 'EXTRAFLAGS=...' to make). */
-/* #define CFQ_USE_MOMENTARY_LAYER_KEYS */
+#define CFQ_USE_MOMENTARY_LAYER_KEYS /* default on */
 
 /** Holding right/left or left/right shift for single or double quote pair */
-/* #define CFQ_USE_SHIFT_QUOTES */
+#define CFQ_USE_SHIFT_QUOTES /* default on */
 
 #define CFQ_USE_DYNAMIC_MACRO
 
@@ -38,7 +38,7 @@
 #  define CFQ_USER_KEY3 KC_NLCK
 #endif
 #if !defined(CFQ_USER_KEY4)
-#  define CFQ_USER_KEY4 KC_BSPC
+#  define CFQ_USER_KEY4 KC_ENT
 #endif
 #if !defined(CFQ_USER_KEY5)
 #  define CFQ_USER_KEY5 KC_DELT
@@ -303,17 +303,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+------|  |------+------+------+------+------+------+--------|
  * | Tab    |   Q  |   W  |   E  |   R  |   T  |   (  |  |  )   |   Y  |   U  |   I  |   O  |   P  |   \    |
  * |--------+------+------+------+------+------|      |  |      |------+------+------+------+------+--------|
- * | Esc    |   A  |   S  |   D  |   F  |   G  |------|  |------|   H  |   J  |   K  |   L  |   ;  |   '    |
+ * | LCtl   |   A  |   S  |   D  |   F  |   G  |------|  |------|   H  |   J  |   K  |   L  |   ;  |   '    |
  * |--------+------+------+------+------+------|   [  |  |  ]   |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |      |  |      |   N  |   M  |   ,  |   .  |   /  | RShift |
  * '--------+------+------+------+------+-------------'  '-------------+------+------+------+------+--------'
- *   | LCtl |Super | Alt  | ~L1  |Space |                              | Left | Down | Up   |Right | Del  |
+ *   | Esc  |Super | Alt  | ~L1  |BSpace|                              | Left | Down | Up   |Right | Del  |
  *   '----------------------------------'                              '----------------------------------'
  *                                      .-------------.  .-------------.
  *                                      | Ins  |NumClk|  | Home | End  |
  *                               .------+------+------|  |------+------+------.
  *                               |      |      |CapsLk|  | PgUp |      |      |
- *                               |BSpace| Del  |------|  |------| ~L2  |Enter |
+ *                               |Enter | Del  |------|  |------| ~L2  |Space |
  *                               |      |      | ~L3  |  | PgDn |      |      |
  *                               '--------------------'  '--------------------'
  *
@@ -345,9 +345,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* left hand */
   KC_GRV,  KC_EXLM, KC_AT,   KC_HASH,       KC_DLR, KC_PERC, KC_LCBR,
   KC_TAB,  KC_Q,    KC_W,    KC_E,          KC_R,   KC_T,    KC_LPRN,
-  KC_ESC,  KC_A,    KC_S,    KC_D,          KC_F,   KC_G,
+  KC_LCTL, KC_A,    KC_S,    KC_D,          KC_F,   KC_G,
   KC_LSFT, KC_Z,    KC_X,    KC_C,          KC_V,   KC_B,    KC_LBRC,
-  KC_LCTL, KC_LGUI, KC_LALT, CFQ_USER_KEY1, KC_SPC,
+  KC_ESC,  KC_LGUI, KC_LALT, CFQ_USER_KEY1, KC_BSPC,
                                                     CFQ_USER_KEY2, CFQ_USER_KEY3,
                                      K80(L0K0),     K80(L0K1),     CFQ_USER_KEY6,
                                      CFQ_USER_KEY4, CFQ_USER_KEY5, CFQ_USER_KEY7,
@@ -359,7 +359,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                         KC_LEFT, KC_DOWN,KC_UP,   KC_RGHT,   CFQ_USER_KEY8,
   KC_HOME, KC_END,
   KC_PGUP, K80(L0K2),  K80(L0K3),
-  KC_PGDN, CFQ_KC_FN2, KC_ENT
+  KC_PGDN, CFQ_KC_FN2, KC_SPC
 ),
 /* Keymap 1: KeyPad, Macro Record
  *
