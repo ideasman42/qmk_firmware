@@ -272,7 +272,7 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  * .--------------------------------------------------.  .--------------------------------------------------.
- * | Grave  |   !  |   @  |   #  |   $  |   %  |      |  |      |   ^  |   &  |   *  |   -  |   =  | ~l3/-> |
+ * | Grave  |   !  |   @  |   #  |   $  |   %  |      |  |      |   ^  |   &  |   *  |   -  |   =  | Insert |
  * |--------+------+------+------+------+------+------|  |------+------+------+------+------+------+--------|
  * | Tab    |   Q  |   W  |   E  |   R  |   T  |      |  |      |   Y  |   U  |   I  |   O  |   P  |   \    |
  * |--------+------+------+------+------+------|      |  |      |------+------+------+------+------+--------|
@@ -280,14 +280,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|      |  |      |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |      |  |      |   N  |   M  |   ,  |   .  |   /  | BSpace |
  * '--------+------+------+------+------+-------------'  '-------------+------+------+------+------+--------'
- *   | LCtl |Super | Alt  |   [  |   ]  |                              | Left | Down | Up   |Right | Del  |
+ *   | LCtl |Super | Alt  |~l3/->|   _  |                              | Left | Down | Up   |Right | Del  |
  *   '----------------------------------'                              '----------------------------------'
  *                                      .-------------.  .-------------.
- *                                      |   (  |  )   |  | Home | End  |
+ *                                      |   (  |  )   |  |   [  |  ]   |
  *                               .------+------+------|  |------+------+------.
- *                               |      |      | Ins  |  | PgUp |      |      |
+ *                               |      |      | Home |  | PgUp |      |      |
  *                               |Space | ~L1  |------|  |------| ~L2  |Enter |
- *                               |      |      |  _   |  | PgDn |      |      |
+ *                               |      |      | End  |  | PgDn |      |      |
  *                               '--------------------'  '--------------------'
  */
 
@@ -299,62 +299,62 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,       KC_TRNS,
   KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,
   KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_TRNS,
-  KC_LCTL, KC_LGUI, KC_LALT, KC_LBRC, KC_RBRC,
+  KC_LCTL, KC_LGUI, KC_LALT, M_ARROW_RMINUS_OR_L3,  KC_UNDS,
                                                KC_LPRN,    KC_RPRN,
-                                    K80(L0K0), K80(L0K1) , KC_INS,
-                                       KC_SPC, CFQ_KC_FN1, KC_UNDS,
+                                    K80(L0K0), K80(L0K1) , KC_HOME ,
+                                       KC_SPC, CFQ_KC_FN1, KC_END,
   /* right hand */
-  KC_TRNS,     KC_CIRC, KC_AMPR, KC_ASTR,KC_MINS, KC_EQL,  M_ARROW_RMINUS_OR_L3,
+  KC_TRNS,     KC_CIRC, KC_AMPR, KC_ASTR,KC_MINS, KC_EQL,  KC_INS,
   KC_TRNS,     KC_Y,    KC_U,    KC_I,   KC_O,    KC_P,    KC_BSLS,
                KC_H,    KC_J,    KC_K,   KC_L,    KC_SCLN, KC_QUOT,
   KC_TRNS,     KC_N,    KC_M,    KC_COMM,KC_DOT,  KC_SLSH, KC_BSPC,
                         KC_LEFT, KC_DOWN,KC_UP,   KC_RGHT, KC_DELT,
-  KC_HOME, KC_END,
+  KC_LBRC, KC_RBRC,
   KC_PGUP, K80(L0K2),  K80(L0K3),
   KC_PGDN, CFQ_KC_FN2, KC_ENT
 ),
 /* Keymap 1: KeyPad, Macro Record
  *
  * .--------------------------------------------------.  .--------------------------------------------------.
- * |        |      |  ><  |   <  |  >   |  <>  |      |  |      |      |NumLck|   /  |   *  |   -  |        |
+ * |        |      |      |      |      |      |      |  |      |      |NumLck|   /  |   *  |   -  |        |
  * |--------+------+------+------+------+------+------|  |------+------+------+------+------+------+--------|
- * |        |      |  }{  |   {  |  }   |  {}  |      |  |      |      |   7  |   8  |   9  |   +  |        |
+ * |        |      |      |      |      |      |      |  |      |      |   7  |   8  |   9  |   +  |        |
  * |--------+------+------+------+------+------+      |  |      |------+------+------+------+------+--------|
- * |        |      |  )(  |   (  |  )   |  ()  |------|  |------|      |   4  |   5  |   6  |   +  |   ''   |
+ * |        |      |      |      |      |      |------|  |------|      |   4  |   5  |   6  |   +  |   ''   |
  * |--------+------+------+------+------+------+      |  |      |------+------+------+------+------+--------|
- * |        |      |  ][  |   [  |  ]   |  []  |      |  |      |      |   1  |   2  |   3  | Enter|        |
+ * |        |      |      |      |      |      |      |  |      |      |   1  |   2  |   3  | Enter|        |
  * '--------+------+------+------+------+------+------'  '-------------+------+------+------+------+--------'
- *   |      |      |      |  []  |  ][  |                              |   0  |      |   .  | Enter|      |
+ *   |      |      |      |      |      |                              |   0  |      |   .  | Enter|      |
  *   '----------------------------------'                              '----------------------------------'
  *                                      .-------------.  .-------------.
- *                                      |  ()  |  )(  |  |Start1|Start2|
+ *                                      |  ()  |  )(  |  |  []  |  ][  |
  *                               .------+------+------|  |------+------+------.
- *                               |      |      |  ><  |  |Play1 |      |      |
- *                               |      |      |------|  |------|      | Stop |
- *                               |      |      |  <>  |  |Play2 |      |      |
+ *                               |      |      |Start1|  |Play1 |      |      |
+ *                               | Stop |      |------|  |------|      |      |
+ *                               |      |      |Start2|  |Play2 |      |      |
  *                               '--------------------'  '--------------------'
  *
  */
 /* KEYPAD & MACRO */
 [LAYER_KPAD] = LAYOUT_ergodox_76_or_80(
   /* left hand */
-  KC_TRNS, KC_TRNS, M_BRACKET_OUT_ANG, KC_LABK, KC_RABK, M_BRACKET_IN_ANG, KC_TRNS,
-  KC_TRNS, KC_TRNS, M_BRACKET_OUT_CBR, KC_LCBR, KC_RCBR, M_BRACKET_IN_CBR, KC_TRNS,
-  KC_TRNS, KC_TRNS, M_BRACKET_OUT_PRN, KC_LPRN, KC_RPRN, M_BRACKET_IN_PRN,
-  KC_TRNS, KC_TRNS, M_BRACKET_OUT_BRC, KC_LBRC, KC_RBRC, M_BRACKET_IN_BRC, KC_TRNS,
-  KC_TRNS, KC_TRNS, KC_TRNS,           M_BRACKET_IN_BRC, M_BRACKET_OUT_BRC,
-                                       M_BRACKET_IN_PRN, M_BRACKET_OUT_PRN,
-                            K80(L1K0), K80(L1K1),        M_BRACKET_OUT_ANG,
-                            KC_TRNS,   KC_TRNS,          M_BRACKET_IN_ANG,
+  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             M_BRACKET_IN_PRN, M_BRACKET_OUT_PRN,
+                  K80(L1K0), K80(L1K1),        DYN_REC_START1,
+               DYN_REC_STOP, KC_TRNS,          DYN_REC_START2,
   /* right hand */
   KC_TRNS, KC_TRNS, KC_NLCK, KC_KP_SLASH, KC_KP_ASTERISK, KC_KP_MINUS, KC_TRNS,
   KC_TRNS, KC_TRNS, KC_KP_7, KC_KP_8,     KC_KP_9,        KC_KP_PLUS,  KC_TRNS,
            KC_TRNS, KC_KP_4, KC_KP_5,     KC_KP_6,        KC_KP_PLUS,  M_QUOTE_PAIR,
   KC_TRNS, KC_TRNS, KC_KP_1, KC_KP_2,     KC_KP_3,        KC_KP_ENTER, KC_TRNS,
                     KC_KP_0, KC_TRNS,     KC_KP_DOT,      KC_KP_ENTER, KC_TRNS,
-  DYN_REC_START1,  DYN_REC_START2,
-  DYN_MACRO_PLAY1, K80(L1K2),      K80(L1K3),
-  DYN_MACRO_PLAY2, KC_TRNS,        DYN_REC_STOP
+  M_BRACKET_IN_BRC, M_BRACKET_OUT_BRC,
+  DYN_MACRO_PLAY1,  K80(L1K2),      K80(L1K3),
+  DYN_MACRO_PLAY2,  KC_TRNS,        KC_TRNS
 ),
 /* Keymap 2: FKeys, media & mouse keys
  *
