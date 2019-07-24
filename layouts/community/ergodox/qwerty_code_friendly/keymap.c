@@ -277,16 +277,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|      |  |      |------+------+------+------+------+--------|
  * | Esc    |   A  |   S  |   D  |   F  |   G  |------|  |------|   H  |   J  |   K  |   L  |   ;  |   '    |
  * |--------+------+------+------+------+------|      |  |      |------+------+------+------+------+--------|
- * | LShift |   Z  |   X  |   C  |   V  |   B  |      |  |      |   N  |   M  |   ,  |   .  |   /  | BSpace |
+ * | LShift |   Z  |   X  |   C  |   V  |   B  |      |  |      |   N  |   M  |   ,  |   .  |   /  | PgUp   |
  * '--------+------+------+------+------+-------------'  '-------------+------+------+------+------+--------'
- *   | LCtl |Super | Alt  |   {  |   }  |                              | Left | Down | Up   |Right | Del  |
+ *   | LCtl |Super | Alt  |   {  |   }  |                              | Left | Down | Up   |Right | PgDn |
  *   '----------------------------------'                              '----------------------------------'
  *                                      .-------------.  .-------------.
  *                                      |   (  |  )   |  |   [  |  ]   |
  *                               .------+------+------|  |------+------+------.
- *                               |      |      | Home |  | PgUp |      |      |
+ *                               |      |      | Home |  | End  |      |      |
  *                               |Space | ~L1  |------|  |------| ~L2  |Enter |
- *                               |      |      | End  |  | PgDn |      |      |
+ *                               |      |      |BSpace|  | Del  |      |      |
  *                               '--------------------'  '--------------------'
  */
 
@@ -301,16 +301,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_LCTL, KC_LGUI, KC_LALT, KC_LCBR, KC_RCBR,
                                                KC_LPRN,    KC_RPRN,
                                     K80(L0K0), K80(L0K1) , KC_HOME ,
-                                       KC_SPC, CFQ_KC_FN1, KC_END,
+                                       KC_SPC, CFQ_KC_FN1, KC_BSPC,
   /* right hand */
   KC_TRNS,     KC_CIRC, KC_AMPR, KC_ASTR,KC_MINS, KC_EQL,  KC_INS,
   KC_TRNS,     KC_Y,    KC_U,    KC_I,   KC_O,    KC_P,    KC_BSLS,
                KC_H,    KC_J,    KC_K,   KC_L,    KC_SCLN, KC_QUOT,
-  KC_TRNS,     KC_N,    KC_M,    KC_COMM,KC_DOT,  KC_SLSH, KC_BSPC,
-                        KC_LEFT, KC_DOWN,KC_UP,   KC_RGHT, KC_DELT,
+  KC_TRNS,     KC_N,    KC_M,    KC_COMM,KC_DOT,  KC_SLSH, KC_PGUP,
+                        KC_LEFT, KC_DOWN,KC_UP,   KC_RGHT, KC_PGDN,
   KC_LBRC, KC_RBRC,
-  KC_PGUP, K80(L0K2),  K80(L0K3),
-  KC_PGDN, CFQ_KC_FN2, KC_ENT
+  KC_END,  K80(L0K2),  K80(L0K3),
+  KC_DELT, CFQ_KC_FN2, KC_ENT
 ),
 /* Keymap 1: KeyPad, Macro Record
  *
