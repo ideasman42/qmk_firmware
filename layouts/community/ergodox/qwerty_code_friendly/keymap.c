@@ -315,11 +315,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 1: KeyPad, Macro Record
  *
  * .--------------------------------------------------.  .--------------------------------------------------.
- * |        |      |      |      |      |      |      |  |      |      |NumLck|   /  |   *  |   -  |   ->   |
+ * |        |      |      |      |      |      |      |  |      |      |NumLck|   /  |   *  |   -  |        |
  * |--------+------+------+------+------+------+------|  |------+------+------+------+------+------+--------|
  * |        |      |      |      |      |      |      |  |      |      |   7  |   8  |   9  |   +  |        |
  * |--------+------+------+------+------+------+      |  |      |------+------+------+------+------+--------|
- * |        |      |      |      |      |      |------|  |------|      |   4  |   5  |   6  |   +  |   ''   |
+ * |        |      |      |  ->  |  _   |      |------|  |------|      |   4  |   5  |   6  |   +  |   ''   |
  * |--------+------+------+------+------+------+      |  |      |------+------+------+------+------+--------|
  * |        |      |      |      |      |      |      |  |      |      |   1  |   2  |   3  | Enter|        |
  * '--------+------+------+------+------+------+------'  '-------------+------+------+------+------+--------'
@@ -337,16 +337,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* KEYPAD & MACRO */
 [LAYER_KPAD] = LAYOUT_ergodox_76_or_80(
   /* left hand */
-  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS,
+  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS,
+  KC_TRNS, KC_TRNS, KC_TRNS, M_ARROW_RMINUS,   KC_UNDS, KC_TRNS,
+  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS,
   KC_TRNS, KC_TRNS, KC_TRNS, M_BRACKET_IN_CBR, M_BRACKET_OUT_CBR,
                              M_BRACKET_IN_PRN, M_BRACKET_OUT_PRN,
                   K80(L1K0), K80(L1K1),        DYN_REC_START1,
                DYN_REC_STOP, KC_TRNS,          DYN_REC_START2,
   /* right hand */
-  KC_TRNS, KC_TRNS, KC_NLCK, KC_KP_SLASH, KC_KP_ASTERISK, KC_KP_MINUS, M_ARROW_RMINUS,
+  KC_TRNS, KC_TRNS, KC_NLCK, KC_KP_SLASH, KC_KP_ASTERISK, KC_KP_MINUS, KC_TRNS,
   KC_TRNS, KC_TRNS, KC_KP_7, KC_KP_8,     KC_KP_9,        KC_KP_PLUS,  KC_TRNS,
            KC_TRNS, KC_KP_4, KC_KP_5,     KC_KP_6,        KC_KP_PLUS,  M_QUOTE_PAIR,
   KC_TRNS, KC_TRNS, KC_KP_1, KC_KP_2,     KC_KP_3,        KC_KP_ENTER, KC_TRNS,
@@ -372,7 +372,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                      |      |      |  | MRwd | MFwd |
  *                               .------+------+------|  |------+------+------.
  *                               |      |      |      |  | MPrv |      |      |
- *                               |  _   |      |------|  |------|      | Play |
+ *                               |      |      |------|  |------|      | Play |
  *                               |      |      |      |  | MNxt |      |      |
  *                               '--------------------'  '--------------------'
  */
@@ -386,7 +386,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                                       KC_TRNS,   KC_TRNS,
                            K80(L2K0), K80(L2K1), KC_TRNS,
-                           KC_UNDS,   KC_TRNS,   KC_TRNS,
+                           KC_TRNS,   KC_TRNS,   KC_TRNS,
   /* right hand */
   KC_MUTE,  KC_TRNS, KC_F10,  KC_F11,  KC_F12,  KC_TRNS, KC_MENU,
   KC_VOLU,  KC_TRNS, KC_F7,   KC_F8,   KC_F9,   KC_TRNS, KC_APP,
