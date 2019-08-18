@@ -279,12 +279,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|      |  |      |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |      |  |      |   N  |   M  |   ,  |   .  |   /  | PgUp   |
  * '--------+------+------+------+------+-------------'  '-------------+------+------+------+------+--------'
- *   | LCtl |Super | Alt  |   {  |   }  |                              | Left | Down | Up   |Right | PgDn |
+ *   | LCtl |Super | Alt  | Home | End  |                              | Left | Down | Up   |Right | PgDn |
  *   '----------------------------------'                              '----------------------------------'
  *                                      .-------------.  .-------------.
- *                                      |   (  |  )   |  |   [  |  ]   |
+ *                                      |   (  |   {  |  |  }   |  )   |
  *                               .------+------+------|  |------+------+------.
- *                               |      |      | Home |  | End  |      |      |
+ *                               |      |      |   [  |  |  ]   |      |      |
  *                               |Space | ~L1  |------|  |------| ~L2  |Enter |
  *                               |      |      |BSpace|  | Del  |      |      |
  *                               '--------------------'  '--------------------'
@@ -298,9 +298,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,       KC_TRNS,
   KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,
   KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_TRNS,
-  KC_LCTL, KC_LGUI, KC_LALT, KC_LCBR, KC_RCBR,
-                                               KC_LPRN,    KC_RPRN,
-                                    K80(L0K0), K80(L0K1) , KC_HOME ,
+  KC_LCTL, KC_LGUI, KC_LALT, KC_HOME, KC_END,
+                                               KC_LPRN,    KC_LCBR,
+                                    K80(L0K0), K80(L0K1),  KC_LBRC,
                                        KC_SPC, CFQ_KC_FN1, KC_BSPC,
   /* right hand */
   KC_TRNS,     KC_CIRC, KC_AMPR, KC_ASTR,KC_MINS, KC_EQL,  KC_INS,
@@ -308,11 +308,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                KC_H,    KC_J,    KC_K,   KC_L,    KC_SCLN, KC_QUOT,
   KC_TRNS,     KC_N,    KC_M,    KC_COMM,KC_DOT,  KC_SLSH, KC_PGUP,
                         KC_LEFT, KC_DOWN,KC_UP,   KC_RGHT, KC_PGDN,
-  KC_LBRC, KC_RBRC,
-  KC_END,  K80(L0K2),  K80(L0K3),
+  KC_RCBR, KC_RPRN,
+  KC_RBRC, K80(L0K2),  K80(L0K3),
   KC_DELT, CFQ_KC_FN2, KC_ENT
 ),
-/* Keymap 1: KeyPad, Macro Record
+/* Keymap 1: KeyPad, Locks & Bracket Pairs
  *
  * .--------------------------------------------------.  .--------------------------------------------------.
  * | PrtScn |      |      |      |      |      |      |  |      |      |NumLck|   /  |   *  |   -  |        |
@@ -323,14 +323,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+      |  |      |------+------+------+------+------+--------|
  * | Break  |      |      |      |      |      |      |  |      |      |   1  |   2  |   3  | Enter|        |
  * '--------+------+------+------+------+------+------'  '-------------+------+------+------+------+--------'
- *   |      |      |      |  {}  |  }{  |                              |   0  |      |   .  | Enter|      |
+ *   |      |      |      |      |      |                              |   0  |      |   .  | Enter|      |
  *   '----------------------------------'                              '----------------------------------'
  *                                      .-------------.  .-------------.
- *                                      |  ()  |  )(  |  |  []  |  ][  |
+ *                                      |  ()  |  {}  |  |  }{  |  )(  |
  *                               .------+------+------|  |------+------+------.
- *                               |      |      |Start1|  |Play1 |      |      |
- *                               | Stop |      |------|  |------|      |      |
- *                               |      |      |Start2|  |Play2 |      |      |
+ *                               |      |      |  []  |  |  ][  |      |      |
+ *                               |      |      |------|  |------|      |      |
+ *                               |      |      |      |  |      |      |      |
  *                               '--------------------'  '--------------------'
  *
  */
@@ -340,58 +340,59 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_PSCREEN,    KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS,
   KC_SCROLLLOCK, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS,
   KC_CAPSLOCK,   KC_TRNS, KC_TRNS, M_ARROW_RMINUS,   KC_UNDS, KC_TRNS,
-  KC_PAUSE,        KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS,
-  KC_TRNS,       KC_TRNS, KC_TRNS, M_BRACKET_IN_CBR, M_BRACKET_OUT_CBR,
-                             M_BRACKET_IN_PRN, M_BRACKET_OUT_PRN,
-                  K80(L1K0), K80(L1K1),        DYN_REC_START1,
-               DYN_REC_STOP, KC_TRNS,          DYN_REC_START2,
+  KC_PAUSE,      KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS,
+  KC_TRNS,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             M_BRACKET_IN_PRN, M_BRACKET_IN_CBR,
+                  K80(L1K0), K80(L1K1),        M_BRACKET_IN_BRC,
+                    KC_TRNS, KC_TRNS,          KC_TRNS,
   /* right hand */
   KC_TRNS, KC_TRNS, KC_NLCK, KC_KP_SLASH, KC_KP_ASTERISK, KC_KP_MINUS, KC_TRNS,
   KC_TRNS, KC_TRNS, KC_KP_7, KC_KP_8,     KC_KP_9,        KC_KP_PLUS,  KC_TRNS,
            KC_TRNS, KC_KP_4, KC_KP_5,     KC_KP_6,        KC_KP_PLUS,  M_QUOTE_PAIR,
   KC_TRNS, KC_TRNS, KC_KP_1, KC_KP_2,     KC_KP_3,        KC_KP_ENTER, KC_TRNS,
                     KC_KP_0, KC_TRNS,     KC_KP_DOT,      KC_KP_ENTER, KC_TRNS,
-  M_BRACKET_IN_BRC, M_BRACKET_OUT_BRC,
-  DYN_MACRO_PLAY1,  K80(L1K2),      K80(L1K3),
-  DYN_MACRO_PLAY2,  KC_TRNS,        KC_TRNS
+  M_BRACKET_OUT_CBR, M_BRACKET_OUT_PRN,
+  M_BRACKET_OUT_BRC, K80(L1K2),      K80(L1K3),
+  KC_TRNS, KC_TRNS,  KC_TRNS
 ),
-/* Keymap 2: FKeys, media & mouse keys
+
+/* Keymap 2: FKeys, macro, media & mouse keys
  *
  * .--------------------------------------------------.  .--------------------------------------------------.
- * |        |      |      |      |      |      |      |  | Mute |      |  F10 |  F11 |  F12 |      | Menu   |
+ * |        |      |      |      |      |      |      |  |      | Mute |  F10 |  F11 |  F12 |      | Menu   |
  * |--------+------+------+------+------+------+------|  |------+------+------+------+------+------+--------|
- * |        |      |      | MsUp |      |      |MWhlUp|  |VolUp |      |  F7  |  F8  |  F9  |      | App    |
+ * |        |      |      | MsUp |      |      |      |  |      |      |  F7  |  F8  |  F9  |      | App    |
  * |--------+------+------+------+------+------|      |  |      |------+------+------+------+------+--------|
- * |        |      |MsLeft|MsDown|MsRght|      |------|  |------|      |  F4  |  F5  |  F6  |      | Search |
- * |--------+------+------+------+------+------|MWhlDn|  |VolDn |------+------+------+------+------+--------|
- * |        |      | Rclk | Mclk | Lclk |      |      |  |      |      |  F1  |  F2  |  F3  |      |        |
+ * |        |      |MsLeft|MsDown|MsRght|MWhlUp|------|  |------|VolUp |  F4  |  F5  |  F6  |      | Search |
+ * |--------+------+------+------+------+------|      |  |      |------+------+------+------+------+--------|
+ * |        |      | Rclk | Mclk | Lclk |MWhlDn|      |  |      |VolDn |  F1  |  F2  |  F3  |      |        |
  * '--------+------+------+------+------+-------------'  '-------------+------+------+------+------+--------'
  *   |      |      |      |      |      |                              |      |      |      |      |      |
  *   '----------------------------------'                              '----------------------------------'
  *                                      .-------------.  .-------------.
- *                                      |      |      |  | MRwd | MFwd |
+ *                                      | Rec1 | Rec2 |  | MRwd | MFwd |
  *                               .------+------+------|  |------+------+------.
- *                               |      |      |      |  | MPrv |      |      |
- *                               |      |      |------|  |------|      | Play |
- *                               |      |      |      |  | MNxt |      |      |
+ *                               |      |      | Run1 |  | MPrv |      |      |
+ *                               | Stop |      |------|  |------|      | Play |
+ *                               |      |      | Run2 |  | MNxt |      |      |
  *                               '--------------------'  '--------------------'
  */
 /* MEDIA, MOUSE & NUMBERS */
 [LAYER_MDIA] = LAYOUT_ergodox_76_or_80(
   /* left hand */
   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-  KC_TRNS, KC_TRNS, KC_TRNS, KC_MS_U, KC_TRNS, KC_TRNS, KC_WH_U,
-  KC_TRNS, KC_TRNS, KC_MS_L, KC_MS_D, KC_MS_R, KC_TRNS,
-  KC_TRNS, KC_TRNS, KC_BTN2, KC_BTN3, KC_BTN1, KC_TRNS, KC_WH_D,
+  KC_TRNS, KC_TRNS, KC_TRNS, KC_MS_U, KC_TRNS, KC_TRNS, KC_TRNS,
+  KC_TRNS, KC_TRNS, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_U,
+  KC_TRNS, KC_TRNS, KC_BTN2, KC_BTN3, KC_BTN1, KC_WH_D, KC_TRNS,
   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-                                      KC_TRNS,   KC_TRNS,
-                           K80(L2K0), K80(L2K1), KC_TRNS,
-                           KC_TRNS,   KC_TRNS,   KC_TRNS,
+                                 DYN_REC_START1, DYN_REC_START2,
+                           K80(L2K0), K80(L2K1), DYN_MACRO_PLAY1,
+                        DYN_REC_STOP, KC_TRNS,   DYN_MACRO_PLAY2,
   /* right hand */
-  KC_MUTE,  KC_TRNS, KC_F10,  KC_F11,  KC_F12,  KC_TRNS, KC_MENU,
-  KC_VOLU,  KC_TRNS, KC_F7,   KC_F8,   KC_F9,   KC_TRNS, KC_APP,
-            KC_TRNS, KC_F4,   KC_F5,   KC_F6,   KC_TRNS, KC_WWW_SEARCH,
-  KC_VOLD,  KC_TRNS, KC_F1,   KC_F2,   KC_F3,   KC_TRNS, KC_TRNS,
+  KC_TRNS,  KC_MUTE, KC_F10,  KC_F11,  KC_F12,  KC_TRNS, KC_MENU,
+  KC_TRNS,  KC_TRNS, KC_F7,   KC_F8,   KC_F9,   KC_TRNS, KC_APP,
+            KC_VOLU, KC_F4,   KC_F5,   KC_F6,   KC_TRNS, KC_WWW_SEARCH,
+  KC_TRNS,  KC_VOLD, KC_F1,   KC_F2,   KC_F3,   KC_TRNS, KC_TRNS,
                      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
   KC_MRWD, KC_MFFD,
   KC_MPRV, K80(L2K2), K80(L2K3),
