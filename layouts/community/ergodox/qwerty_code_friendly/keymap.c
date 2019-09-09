@@ -315,13 +315,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 1: KeyPad, Locks & Bracket Pairs
  *
  * .--------------------------------------------------.  .--------------------------------------------------.
- * | PrtScn |      |      |      |      |      |      |  |      |      |NumLck|   /  |   *  |   -  |        |
+ * | PrtScn |ScrlLk|CapsLk|Break |      |      |      |  |      |      |NumLck|   /  |   *  |   -  |        |
  * |--------+------+------+------+------+------+------|  |------+------+------+------+------+------+--------|
- * | ScrlLk |      |      |      |      |      |      |  |      |      |   7  |   8  |   9  |   +  |        |
+ * |        |      |      |      |      |      |      |  |      |      |   7  |   8  |   9  |   +  |        |
  * |--------+------+------+------+------+------+      |  |      |------+------+------+------+------+--------|
- * | CapsLk |      |      |  ->  |  _   |      |------|  |------|      |   4  |   5  |   6  |   +  |   ''   |
+ * |        |      |      |  ->  |  _   |      |------|  |------|      |   4  |   5  |   6  |   +  |   ''   |
  * |--------+------+------+------+------+------+      |  |      |------+------+------+------+------+--------|
- * | Break  |      |      |      |      |      |      |  |      |      |   1  |   2  |   3  | Enter|        |
+ * |        |      |      |      |      |      |      |  |      |      |   1  |   2  |   3  | Enter|        |
  * '--------+------+------+------+------+------+------'  '-------------+------+------+------+------+--------'
  *   |      |      |      |      |      |                              |   0  |      |   .  | Enter|      |
  *   '----------------------------------'                              '----------------------------------'
@@ -337,11 +337,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* KEYPAD & MACRO */
 [LAYER_KPAD] = LAYOUT_ergodox_76_or_80(
   /* left hand */
-  KC_PSCREEN,    KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS,
-  KC_SCROLLLOCK, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS,
-  KC_CAPSLOCK,   KC_TRNS, KC_TRNS, M_ARROW_RMINUS,   KC_UNDS, KC_TRNS,
-  KC_PAUSE,      KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS,
-  KC_TRNS,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+  KC_PSCR, KC_SLCK, KC_CAPS, KC_PAUS,          KC_TRNS, KC_TRNS, KC_TRNS,
+  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS,
+  KC_TRNS, KC_TRNS, KC_TRNS, M_ARROW_RMINUS,   KC_UNDS, KC_TRNS,
+  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS,
+  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                              M_BRACKET_IN_PRN, M_BRACKET_IN_CBR,
                   K80(L1K0), K80(L1K1),        M_BRACKET_IN_BRC,
                     KC_TRNS, KC_TRNS,          KC_TRNS,

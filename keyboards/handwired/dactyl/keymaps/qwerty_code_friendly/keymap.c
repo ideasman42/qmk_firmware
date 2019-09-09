@@ -1,7 +1,8 @@
 #include QMK_KEYBOARD_H
 #include "version.h"
 
- // make handwired/dactyl:qwerty_code_friendly:teensy
+// make handwired/dactyl:qwerty_code_friendly:teensy
+// http://www.keyboard-layout-editor.com/#/gists/4a233b17def3a75d285047e920ff1279
 
 #define CFQ_USE_DYNAMIC_MACRO
 
@@ -188,13 +189,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 1: KeyPad, Locks & Bracket Pairs
  *
  * .-----------------------------------------.        .-----------------------------------------.
- * |PrtScn|      |      |      |      |      |        |      |NumLck|   /  |   *  |   -  |      |
+ * |PrtScn|ScrlLk|CapsLk|Break |      |      |        |      |NumLck|   /  |   *  |   -  |      |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |ScrlLk|      |      |      |      |      |        |      |   7  |   8  |   9  |   +  |      |
+ * |      |      |      |      |      |      |        |      |   7  |   8  |   9  |   +  |      |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |CapsLk|      |      |  ->  |  _   |      |        |      |   4  |   5  |   6  |   +  |  ''  |
+ * |      |      |      |  ->  |  _   |      |        |      |   4  |   5  |   6  |   +  |  ''  |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |Break |      |      |      |      |      |        |      |   1  |   2  |   3  | Enter|      |
+ * |      |      |      |      |      |      |        |      |   1  |   2  |   3  | Enter|      |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
  * |      |      |      |      |      |                      |   0  |      |   .  | Enter|      |
  * '----------------------------------'                      '----------------------------------'
@@ -209,10 +210,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // SYMBOLS
 [LAYER_KPAD] = LAYOUT_dactyl(
   /* left hand */
-     KC_PSCREEN,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-  KC_SCROLLLOCK,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-    KC_CAPSLOCK,        KC_TRNS,        KC_TRNS, M_ARROW_RMINUS,        KC_UNDS,        KC_TRNS,
-       KC_PAUSE,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+     KC_PSCREEN,  KC_SCROLLLOCK,    KC_CAPSLOCK,       KC_PAUSE,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS, M_ARROW_RMINUS,        KC_UNDS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
                                                                M_BRACKET_IN_PRN, M_BRACKET_IN_CBR,
                                                                                M_BRACKET_IN_BRC,
