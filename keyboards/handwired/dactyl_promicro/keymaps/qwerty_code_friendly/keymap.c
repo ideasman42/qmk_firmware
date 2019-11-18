@@ -277,13 +277,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |      |      | Rclk | Mclk | Lclk |MWhlDn|        |VolDn |  F1  |  F2  |  F3  |      |      |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
- * |      |      |      |      |      |                      |      |      |      |      |      |
+ * |      |      |      |      |      |                      | Play |      |      |      |      |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
  *                                | Rec1 | Rec2 |  | MRwd | MFwd |
  *                         .------+------+------|  |------+------+------.
  *                         |      |      | Run1 |  | MPrv |      |      |
- *                         | Stop |      |------|  |------|      | Play |
+ *                         | Stop |      |------|  |------|      |      |
  *                         |      |      | Run2 |  | MNxt |      |      |
  *                         '--------------------'  '--------------------'
  *
@@ -304,10 +304,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,          KC_F7,          KC_F8,          KC_F9,        KC_TRNS,         KC_APP,
         KC_VOLU,          KC_F4,          KC_F5,          KC_F6,        KC_TRNS,  KC_WWW_SEARCH,
         KC_VOLD,          KC_F1,          KC_F2,          KC_F3,        KC_TRNS,        KC_TRNS,
-                        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+                        KC_MPLY,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
         KC_MRWD,        KC_MFFD,
         KC_MPRV,
-        KC_MNXT,        KC_TRNS,        KC_MPLY
+        KC_MNXT,        KC_TRNS,        KC_TRNS
 ),
 /* Keymap 3: Entire Words (one for each key) & Numbers
  *
