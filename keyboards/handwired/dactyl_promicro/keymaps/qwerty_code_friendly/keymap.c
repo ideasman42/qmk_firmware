@@ -44,6 +44,9 @@
 
 #define CFQ_USE_DYNAMIC_MACRO
 
+/* Tap layer keys for other keys. */
+#define CFQ_USE_TAP_LAYER 200
+
 #define LAYER_BASE 0 /* default layer */
 #define LAYER_KPAD 1 /* keypad */
 #define LAYER_MDIA 2 /* media keys */
@@ -198,7 +201,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                .-------------.  .-------------.
  *                                |   (  |   {  |  |  }   |  )   |
  *                         .------+------+------|  |------+------+------.
- *                         |      |      |   [  |  |  ]   |      |      |
+ *                         |      |tap:_ |   [  |  |  ]   |tap:->|      |
  *                         |Space | ~L1  |------|  |------| ~L2  |Enter |
  *                         |      |      |BSpace|  | Del  |      |      |
  *                         '--------------------'  '--------------------'
@@ -359,6 +362,13 @@ uint32_t layer_state_set_user(uint32_t state) {
   return state;
 }
 
+#ifdef CFQ_USE_TAP_LAYER
+static struct {
+  uint8_t time;
+  uint16_t keycode;
+} cfq_tap_detect;
+#endif
+
 #define WITHOUT_MODS(...) \
   do { \
     uint8_t _real_mods = get_mods(); \
@@ -374,6 +384,46 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return false;
   }
 #endif
+
+#ifdef CFQ_USE_TAP_LAYER
+  {
+    bool is_tap = false;
+    if (record->event.pressed) {
+      cfq_tap_detect.keycode = keycode;
+      cfq_tap_detect.time = 0;
+    }
+    else {
+      if (cfq_tap_detect.time < CFQ_USE_TAP_LAYER) {
+        /* Released within tap-time. */
+        if (cfq_tap_detect.keycode == keycode) {
+          /* Pressed and released the same key within the tap-time. */
+          is_tap = true;
+        }
+        cfq_tap_detect.time = CFQ_USE_TAP_LAYER;
+      }
+    }
+
+    if (is_tap) {
+      if (keycode == MO(1)) {
+        if ((layer_state & ~(1UL << 1)) == 0){
+          WITHOUT_MODS({
+            SEND_STRING("_");
+          });
+          return true;
+        }
+      }
+      else if (keycode == MO(2)) {
+        if ((layer_state & ~(1UL << 2)) == 0){
+          WITHOUT_MODS({
+            SEND_STRING("->");
+          });
+          return true;
+        }
+      }
+    }
+  }
+#endif
+
   switch (keycode) {
     /* dynamically generate these. */
     case M_BRACK_IN_CBR:  /* {} */
@@ -520,8 +570,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // Runs just one time when the keyboard initializes.
 void matrix_init_user(void) {
 
-};
-
+}
 
 // Runs constantly in the background, in a loop.
-void matrix_scan_user(void) {};
+void matrix_scan_user(void) {
+
+#ifdef CFQ_USE_TAP_LAYER
+  if (cfq_tap_detect.time != CFQ_USE_TAP_LAYER) {
+    cfq_tap_detect.time++;
+  }
+#endif
+
+}
