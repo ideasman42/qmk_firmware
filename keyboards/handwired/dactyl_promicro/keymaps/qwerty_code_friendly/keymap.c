@@ -377,6 +377,14 @@ static struct {
     set_mods(_real_mods); \
   } while (0)
 
+#define WITHOUT_SHIFT(...) \
+  do { \
+    uint8_t _real_mods = get_mods(); \
+    del_mods(MOD_BIT(KC_LSFT)); \
+    { __VA_ARGS__ } \
+    set_mods(_real_mods); \
+  } while (0)
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 #ifdef CFQ_USE_DYNAMIC_MACRO
@@ -406,7 +414,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (is_tap) {
       if (keycode == MO(1)) {
         if ((layer_state & ~(1UL << 1)) == 0){
-          WITHOUT_MODS({
+          WITHOUT_SHIFT({
             SEND_STRING("_");
           });
           return true;
