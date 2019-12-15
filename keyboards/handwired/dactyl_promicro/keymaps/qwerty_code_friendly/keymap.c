@@ -196,14 +196,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |LShift|   Z  |   X  |   C  |   V  |   B  |        |   N  |   M  |   ,  |   .  |  /   | PgUp |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
- * | LCtl |Super | Alt  | Home | End  |                      | Left | Down | Up   |Right | PgDn |
+ * | LCtl |Super | Alt  | CpLk | ScLk |                      | Left | Down | Up   |Right | PgDn |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
  *                                |   (  |   {  |  |  }   |  )   |
  *                         .------+------+------|  |------+------+------.
- *                         |      |tap:_ |   [  |  |  ]   |tap:->|      |
- *                         |Space | ~L1  |------|  |------| ~L2  |Enter |
- *                         |      |      |BSpace|  | Del  |      |      |
+ *                         |      |tap:  |   [  |  |  ]   |tap:  |      |
+ *                         |Space | Home |------|  |------| End  |Enter |
+ *                         |      | ~L1  |BSpace|  | Del  | ~L2  |      |
  *                         '--------------------'  '--------------------'
  */
 [LAYER_BASE] = LAYOUT_dactyl(  // layer 0 : default
@@ -212,7 +212,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          KC_TAB,           KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,
          KC_ESC,           KC_A,           KC_S,           KC_D,           KC_F,           KC_G,
         KC_LSFT,           KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,
-        KC_LCTL,        KC_LGUI,        KC_LALT,        KC_HOME,         KC_END,
+        KC_LCTL,        KC_LGUI,        KC_LALT,        KC_CAPSLOCK,    KC_SLCK,
                                                                         KC_LPRN,        KC_LCBR,
                                                                                         KC_LBRC,
                                                          KC_SPC,          MO(1),        KC_BSPC,
@@ -272,9 +272,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 2: FKeys, macro, media & mouse keys
  *
  * .-----------------------------------------.        .-----------------------------------------.
- * |      |      |      |      |      |      |        | Mute |  F10 |  F11 |  F12 |      |Menu  |
+ * |      |      |      |      |      |      |        | Mute |  F10 |  F11 |  F12 |      |App   |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      |      | MsUp |      |      |        |      |  F7  |  F8  |  F9  |      |App   |
+ * |      |      |      | MsUp |      |      |        |      |  F7  |  F8  |  F9  |      |Menu  |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |      |      |MsLeft|MsDown|MsRght|MWhlUp|        |VolUp |  F4  |  F5  |  F6  |      |Search|
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
@@ -299,12 +299,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,        KC_TRNS,        KC_MS_L,        KC_MS_D,        KC_MS_R,        KC_WH_U,
         KC_TRNS,        KC_TRNS,        KC_BTN2,        KC_BTN3,        KC_BTN1,        KC_WH_D,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-                                                                 DYN_REC_START1, DYN_REC_START2,
-                                                                                DYN_MACRO_PLAY1,
-                                                   DYN_REC_STOP,        KC_TRNS, DYN_MACRO_PLAY2,
+                                                                        DM_REC1,        DM_REC2,
+                                                                                        DM_PLY1,
+                                                        DM_RSTP,        KC_TRNS,        DM_PLY2,
   /* right hand */
-        KC_MUTE,         KC_F10,         KC_F11,         KC_F12,        KC_TRNS,        KC_MENU,
-        KC_TRNS,          KC_F7,          KC_F8,          KC_F9,        KC_TRNS,         KC_APP,
+        KC_MUTE,         KC_F10,         KC_F11,         KC_F12,        KC_TRNS,         KC_APP,
+        KC_TRNS,          KC_F7,          KC_F8,          KC_F9,        KC_TRNS,        KC_MENU,
         KC_VOLU,          KC_F4,          KC_F5,          KC_F6,        KC_TRNS,  KC_WWW_SEARCH,
         KC_VOLD,          KC_F1,          KC_F2,          KC_F3,        KC_TRNS,        KC_TRNS,
                         KC_MPLY,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
@@ -414,17 +414,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (is_tap) {
       if (keycode == MO(1)) {
         if ((layer_state & ~(1UL << 1)) == 0){
-          WITHOUT_SHIFT({
-            SEND_STRING("_");
-          });
+          // WITHOUT_SHIFT({SEND_STRING("_");});
+          SEND_STRING(SS_TAP(X_HOME));
           return true;
         }
       }
       else if (keycode == MO(2)) {
         if ((layer_state & ~(1UL << 2)) == 0){
-          WITHOUT_MODS({
-            SEND_STRING("->");
-          });
+          // WITHOUT_MODS({SEND_STRING("->");});
+          SEND_STRING(SS_TAP(X_END));
           return true;
         }
       }
