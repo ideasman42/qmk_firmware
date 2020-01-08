@@ -1,4 +1,9 @@
-/* IDEALLY WE WOULDNT DEFINE HERE! */
+/* -*- Mode:C; c-basic-offset:2; tab-width:2; indent-tabs-mode:nil; evil-indent-convert-tabs:t; -*- */
+
+#include QMK_KEYBOARD_H
+#include "version.h"
+
+/* TODO: move outside of this file. */
 #define LAYOUT_dactyl(                                                  \
                                                                         \
     k00,k01,k02,k03,k04,k05,                                            \
@@ -36,12 +41,6 @@
      {k56, k57, k58, k59, k5A, KC_NO }, \
    }
 
-#include QMK_KEYBOARD_H
-#include "version.h"
-
-// sudo make handwired/dactyl_promicro:qwerty_code_friendly:avrdude
-// http://www.keyboard-layout-editor.com/#/gists/4a233b17def3a75d285047e920ff1279
-
 #define CFQ_USE_DYNAMIC_MACRO
 
 /* Tap layer keys for other keys. */
@@ -53,7 +52,8 @@
 #define LAYER_WORD 3 /* F-Keys & Words */
 
 enum custom_keycodes {
-  PLACEHOLDER = SAFE_RANGE, // ensure these codes start after the highest keycode defined in Quantum
+  /* Ensure these codes start after the highest keycode defined in Quantum. */
+  PLACEHOLDER = SAFE_RANGE,
 
   M_BRACK_IN_CBR,
   M_BRACK_IN_PRN,
@@ -573,12 +573,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 
-// Runs just one time when the keyboard initializes.
+/* Runs just one time when the keyboard initializes. */
 void matrix_init_user(void) {
 
 }
 
-// Runs constantly in the background, in a loop.
+/* Runs constantly in the background, in a loop. */
 void matrix_scan_user(void) {
 
 #ifdef CFQ_USE_TAP_LAYER
