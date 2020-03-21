@@ -19,10 +19,6 @@
   if using keys from both sides is inconvenient - the symbol layer has macros
   at the same key locations to type matching pairs.
 
-- The space-bar on the lower-left looks like it's in an obscure location,
-  however using the larger thumb cluster
-  ended up being more of a reach while typing.
-
 ## Configuration
 
 Some optional behavior is configurable without editing the code
