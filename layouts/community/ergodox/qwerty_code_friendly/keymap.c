@@ -49,7 +49,7 @@
 #  define CFQ_USER_KEY7 KC_INS
 #endif
 #if !defined(CFQ_USER_KEY8)
-#  define CFQ_USER_KEY8 KC_DEL
+#  define CFQ_USER_KEY8 KC_ENT
 #endif
 #if !defined(CFQ_USER_KEY9)
 #  define CFQ_USER_KEY9 KC_BSPC
@@ -273,6 +273,11 @@ enum custom_keycodes {
   M_WORD_S, M_WORD_T, M_WORD_U, M_WORD_V, M_WORD_W, M_WORD_X,
   M_WORD_Y, M_WORD_Z,
 
+  M_WORD_OTHER_1,
+  M_WORD_OTHER_2,
+  M_WORD_OTHER_3,
+  M_WORD_OTHER_4,
+
 #ifdef CFQ_USE_DYNAMIC_MACRO
   DYNAMIC_MACRO_RANGE,
 #endif
@@ -316,7 +321,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                      |BSpace| Del  |  | Home | End  |
  *                               .------+------+------|  |------+------+------.
  *                               |      |      |CapsLk|  | PgUp |      |      |
- *                               |Space | ~L1  |------|  |------| ~L2  |Enter |
+ *                               |Space | ~L1  |------|  |------| ~L2  |Space |
  *                               |      |      |Insert|  | PgDn |      |      |
  *                               '--------------------'  '--------------------'
  *
@@ -361,7 +366,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                         KC_LEFT, KC_DOWN,KC_UP,   KC_RGHT,   CFQ_USER_KEY8,
   KC_HOME, KC_END,
   KC_PGUP, K80(L0K2),  K80(L0K3),
-  KC_PGDN, CFQ_KC_FN2, KC_ENT
+  KC_PGDN, CFQ_KC_FN2, KC_SPC
 ),
 /* Keymap 1: Keypad, Bracket Pairs & Macro Record
  *
@@ -624,6 +629,30 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       break;
     }
+
+    /* Support other words 1..4, could increase. */
+#ifdef CFQ_OTHER_WORD_1
+    case M_WORD_OTHER_1...M_WORD_OTHER_4:
+    {
+      const char *cfq_word_other_lut[4] = {
+        CFQ_OTHER_WORD_1,
+        CFQ_OTHER_WORD_2,
+        CFQ_OTHER_WORD_3,
+        CFQ_OTHER_WORD_4,
+      };
+      const char *word = cfq_word_other_lut[keycode - M_WORD_OTHER_1];
+      if (record->event.pressed) {
+        if (*word) {
+          WITHOUT_MODS({
+              send_string(word);
+            });
+        }
+        return false;
+      }
+      break;
+    }
+#endif /* M_WORD_OTHER_1 */
+
   }
 
   return true;
