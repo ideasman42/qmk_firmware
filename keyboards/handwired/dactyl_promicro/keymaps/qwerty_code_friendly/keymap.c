@@ -274,13 +274,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * .-----------------------------------------.        .-----------------------------------------.
  * |      |      |      |      |      |      |        | Mute |  F10 |  F11 |  F12 |      |App   |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      |      | MsUp |      |      |        |      |  F7  |  F8  |  F9  |      |Menu  |
+ * |      |      |      | MsUp |      |      |        | Play |  F7  |  F8  |  F9  |      |Menu  |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |      |      |MsLeft|MsDown|MsRght|MWhlUp|        |VolUp |  F4  |  F5  |  F6  |      |Search|
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |      |      | Rclk | Mclk | Lclk |MWhlDn|        |VolDn |  F1  |  F2  |  F3  |      |      |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
- * |      |      |      |      |      |                      | Play |      |      |      |      |
+ * |      |      |      |      |      |                      |  F13 |  F14 |  F15 |  F16 |      |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
  *                                | Rec1 | Rec2 |  | MRwd | MFwd |
@@ -304,10 +304,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                         DM_RSTP,        KC_TRNS,        DM_PLY2,
   /* right hand */
         KC_MUTE,         KC_F10,         KC_F11,         KC_F12,        KC_TRNS,         KC_APP,
-        KC_TRNS,          KC_F7,          KC_F8,          KC_F9,        KC_TRNS,        KC_MENU,
+        KC_MPLY,          KC_F7,          KC_F8,          KC_F9,        KC_TRNS,        KC_MENU,
         KC_VOLU,          KC_F4,          KC_F5,          KC_F6,        KC_TRNS,  KC_WWW_SEARCH,
         KC_VOLD,          KC_F1,          KC_F2,          KC_F3,        KC_TRNS,        KC_TRNS,
-                        KC_MPLY,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+                         KC_F13,         KC_F14,         KC_F15,         KC_F16,        KC_TRNS,
         KC_MRWD,        KC_MFFD,
         KC_MPRV,
         KC_MNXT,        KC_TRNS,        KC_TRNS
