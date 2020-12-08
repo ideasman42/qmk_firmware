@@ -50,6 +50,8 @@
 #define LAYER_KPAD 1 /* keypad */
 #define LAYER_MDIA 2 /* media keys */
 #define LAYER_WORD 3 /* F-Keys & Words */
+#define LAYER_PAGE 4 /* Page/Home keys */
+#define LAYER_DIRS 5 /* Arrow keys */
 
 enum custom_keycodes {
   /* Ensure these codes start after the highest keycode defined in Quantum. */
@@ -185,6 +187,31 @@ static char *cfq_word_lut[2][26] = {
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+
+/* Keymap 0: Basic layer
+ *
+ * .-----------------------------------------.       .-----------------------------------------.
+ * | Grv  |   !  |   @  |   #  |   $  |   %  |       |   ^  |   &  |   *  |   -  |   =  | Ins  |
+ * |------+------+------+------+------+------|       |------+------+------+------+------+------|
+ * | Tab  |   Q  |   W  |   E  |   R  |   T  |       |   Y  |   U  |   I  |   O  |   P  |  \   |
+ * |------+------+------+------+------+------|       |------+------+------+------+------+------|
+ * |CtlEsc|   A  |   S  |   D  |   F  |   G  |       |   H  |   J  |   K  |   L  |  ;   |  '   |
+ * |------+------+------+------+------+------|       |------+------+------+------+------+------|
+ * |Shift |   Z  |   X  |   C  |   V  |   B  |       |   N  |   M  |   ,  |   .  |  /   | ScLk |
+ * '------+------+------+------+------+------'       '------+------+------+------+------+------'
+ *               | Super| Alt  |                                   |BSpace| Delt |
+ *               '-------------'                                   '-------------'
+ *
+ *               .------+------. .-------------.  .-------------. .------+------.
+ *               |Space |  [   | |   (  |   {  |  |  }   |  )   | |   ]  |Enter |
+ *               '-------------' |------+------|  |------+------| '-------------'
+ *                               |L1/Hom|PG/HOM|  |ARROWS|L2/End|
+ *                               '-------------'  '-------------'
+ *
+ * PG/HME: HJKL for page up down, home, end.
+ * ARROWS: HJKL for arrow keys.
+ */
+
 /* Keymap 0: Basic layer
  *
  * .-----------------------------------------.        .-----------------------------------------.
@@ -192,27 +219,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |        |   Y  |   U  |   I  |   O  |   P  |  \   |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * | Esc  |   A  |   S  |   D  |   F  |   G  |        |   H  |   J  |   K  |   L  |  ;   |  '   |
+ * |CtlEsc|   A  |   S  |   D  |   F  |   G  |        |   H  |   J  |   K  |   L  |  ;   |  '   |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |LShift|   Z  |   X  |   C  |   V  |   B  |        |   N  |   M  |   ,  |   .  |  /   | PgUp |
+ * |LShift|   Z  |   X  |   C  |   V  |   B  |        |   N  |   M  |   ,  |   .  |  /   |      |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
- * | LCtl |Super | Alt  | CpLk | ScLk |                      | Left | Down | Up   |Right | PgDn |
+ * |      |Super | Alt  | CpLk | ScLk |                      | BSpc | Delt |      |      |      |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
  *                                |   (  |   {  |  |  }   |  )   |
  *                         .------+------+------|  |------+------+------.
  *                         |      |tap:  |   [  |  |  ]   |tap:  |      |
  *                         |Space | Home |------|  |------| End  |Enter |
- *                         |      | ~L1  |BSpace|  | Del  | ~L2  |      |
+ *                         |      | ~L1  |PG/HOM|  |ARROWS| ~L2  |      |
  *                         '--------------------'  '--------------------'
  */
 [LAYER_BASE] = LAYOUT_dactyl(  // layer 0 : default
   /* left hand */
          KC_GRV,        KC_EXLM,          KC_AT,        KC_HASH,         KC_DLR,        KC_PERC,
          KC_TAB,           KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,
-         KC_ESC,           KC_A,           KC_S,           KC_D,           KC_F,           KC_G,
+        KC_LCTL,           KC_A,           KC_S,           KC_D,           KC_F,           KC_G,
         KC_LSFT,           KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,
-        KC_LCTL,        KC_LGUI,        KC_LALT,        KC_CAPSLOCK,    KC_SLCK,
+        KC_TRNS,        KC_LGUI,        KC_LALT,        KC_CAPSLOCK,    KC_SLCK,
                                                                         KC_LPRN,        KC_LCBR,
                                                                                         KC_LBRC,
                                                          KC_SPC,          MO(1),        KC_BSPC,
@@ -222,7 +249,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,        KC_BSLS,
            KC_H,           KC_J,           KC_K,           KC_L,        KC_SCLN,        KC_QUOT,
            KC_N,           KC_M,        KC_COMM,         KC_DOT,        KC_SLSH,        KC_PGUP,
-                        KC_LEFT,        KC_DOWN,          KC_UP,        KC_RGHT,        KC_PGDN,
+                        KC_BSPC,        KC_DELT,        KC_TRNS,        KC_TRNS,        KC_PGDN,
         KC_RCBR,        KC_RPRN,
         KC_RBRC,
         KC_DELT,          MO(2),         KC_ENT
@@ -354,6 +381,93 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,
         KC_TRNS,        KC_TRNS,        KC_TRNS
 ),
+
+
+/* Keymap 4: Page
+ *
+ * .-----------------------------------------.        .-----------------------------------------.
+ * |      |      |      |      |      |      |        |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|        |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |        |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|        |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |        | Home | PgDn | PgUp | End  |      |      |
+ * |------+------+------+------+------+------|        |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |        |      |      |      |      |      |      |
+ * |------+------+------+------+------+------'        '------+------+------+------+------+------|
+ * |      |      |      |      |      |                      |      |      |      |      |      |
+ * '----------------------------------'                      '----------------------------------'
+ *                                .-------------.  .-------------.
+ *                                |      |      |  |      |      |
+ *                         .------+------+------|  |------+------+------.
+ *                         |      |      |      |  |      |      |      |
+ *                         |      |      |------|  |------|      |      |
+ *                         |      |      |      |  |      |      |      |
+ *                         '--------------------'  '--------------------'
+ */
+// MEDIA AND MOUSE
+[LAYER_PAGE] = LAYOUT_dactyl(
+  /* left hand */
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+                                                                        KC_TRNS,         KC_TRNS,
+                                                                                         KC_TRNS,
+                                                        KC_TRNS,        KC_TRNS,         KC_TRNS,
+  /* right hand */
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
+                        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
+        KC_TRNS,        KC_TRNS,
+        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS
+),
+/* Keymap 4: Page
+ *
+ * .-----------------------------------------.        .-----------------------------------------.
+ * |      |      |      |      |      |      |        |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|        |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |        |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|        |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |        | Left | Down | Up   |Right |      |      |
+ * |------+------+------+------+------+------|        |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |        |      |      |      |      |      |      |
+ * |------+------+------+------+------+------'        '------+------+------+------+------+------|
+ * |      |      |      |      |      |                      |      |      |      |      |      |
+ * '----------------------------------'                      '----------------------------------'
+ *                                .-------------.  .-------------.
+ *                                |      |      |  |      |      |
+ *                         .------+------+------|  |------+------+------.
+ *                         |      |      |      |  |      |      |      |
+ *                         |      |      |------|  |------|      |      |
+ *                         |      |      |      |  |      |      |      |
+ *                         '--------------------'  '--------------------'
+ */
+// MEDIA AND MOUSE
+[LAYER_DIRS] = LAYOUT_dactyl(
+  /* left hand */
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+                                                                        KC_TRNS,         KC_TRNS,
+                                                                                         KC_TRNS,
+                                                        KC_TRNS,        KC_TRNS,         KC_TRNS,
+  /* right hand */
+           KC_6,           KC_7,           KC_8,           KC_9,           KC_0,         KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
+        KC_LEFT,        KC_DOWN,          KC_UP,        KC_RGHT,        KC_TRNS,         KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
+                        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
+        KC_TRNS,        KC_TRNS,
+        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS
+),
+
 };
 
 uint32_t layer_state_set_user(uint32_t state) {
@@ -381,6 +495,14 @@ static struct {
   do { \
     uint8_t _real_mods = get_mods(); \
     del_mods(MOD_BIT(KC_LSFT)); \
+    { __VA_ARGS__ } \
+    set_mods(_real_mods); \
+  } while (0)
+
+#define WITHOUT_MOD_BITS(mods, ...) \
+  do { \
+    uint8_t _real_mods = get_mods(); \
+    del_mods(mods); \
     { __VA_ARGS__ } \
     set_mods(_real_mods); \
   } while (0)
@@ -426,6 +548,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           return true;
         }
       }
+      else if (keycode == KC_LCTL) {
+        if ((layer_state & ~(1UL << 1)) == 0){
+          WITHOUT_MOD_BITS(MOD_BIT(KC_LCTL), {SEND_STRING(SS_TAP(X_ESCAPE));});
+          return true;
+        }
+      }
+
     }
   }
 #endif
