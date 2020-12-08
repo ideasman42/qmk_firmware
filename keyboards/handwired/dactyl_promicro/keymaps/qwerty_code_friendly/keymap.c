@@ -221,9 +221,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |CtlEsc|   A  |   S  |   D  |   F  |   G  |        |   H  |   J  |   K  |   L  |  ;   |  '   |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |LShift|   Z  |   X  |   C  |   V  |   B  |        |   N  |   M  |   ,  |   .  |  /   |      |
+ * |LShift|   Z  |   X  |   C  |   V  |   B  |        |   N  |   M  |   ,  |   .  |  /   | ScLk |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
- * |      |Super | Alt  | CpLk |      |                      | BSpc | Delt |      |      | ScLk |
+ * |      |      |Super | Alt  |      |                      |      | BSpc | Delt |      |      |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
  *                                |   (  |   {  |  |  }   |  )   |
@@ -239,7 +239,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          KC_TAB,           KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,
         KC_LCTL,           KC_A,           KC_S,           KC_D,           KC_F,           KC_G,
         KC_LSFT,           KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,
-        KC_TRNS,        KC_LGUI,        KC_LALT,        KC_CAPSLOCK,    KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_LGUI,        KC_LALT,        KC_TRNS,
                                                                         KC_LPRN,        KC_LCBR,
                                                                                         KC_LBRC,
                                                          KC_SPC,          MO(1),          MO(4),
@@ -248,8 +248,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_CIRC,        KC_AMPR,        KC_ASTR,        KC_MINS,         KC_EQL,         KC_INS,
            KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,        KC_BSLS,
            KC_H,           KC_J,           KC_K,           KC_L,        KC_SCLN,        KC_QUOT,
-           KC_N,           KC_M,        KC_COMM,         KC_DOT,        KC_SLSH,        KC_TRNS,
-                        KC_BSPC,        KC_DELT,        KC_TRNS,        KC_TRNS,        KC_SLCK,
+           KC_N,           KC_M,        KC_COMM,         KC_DOT,        KC_SLSH,        KC_SLCK,
+                        KC_TRNS,        KC_BSPC,        KC_DELT,        KC_TRNS,        KC_TRNS,
         KC_RCBR,        KC_RPRN,
         KC_RBRC,
           MO(5),          MO(2),         KC_ENT
