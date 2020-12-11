@@ -191,13 +191,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
  * .-----------------------------------------.       .-----------------------------------------.
- * | Grv  |   !  |   @  |   #  |   $  |   %  |       |   ^  |   &  |   *  |   -  |   =  |BSpace|
+ * | Grv  |   !  |   @  |   #  |   $  |   %  |       |   ^  |   &  |   *  |   -  |   =  |Insert|
  * |------+------+------+------+------+------|       |------+------+------+------+------+------|
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |       |   Y  |   U  |   I  |   O  |   P  |  \   |
  * |------+------+------+------+------+------|       |------+------+------+------+------+------|
- * |SftEsc|   A  |   S  |   D  |   F  |   G  |       |   H  |   J  |   K  |   L  |  ;   |  '   |
+ * |Esc/AR|   A  |   S  |   D  |   F  |   G  |       |   H  |   J  |   K  |   L  |  ;   |  '   |
  * |------+------+------+------+------+------|       |------+------+------+------+------+------|
- * |LCtrl |   Z  |   X  |   C  |   V  |   B  |       |   N  |   M  |   ,  |   .  |  /   | Delt |
+ * |Ctrl  |   Z  |   X  |   C  |   V  |   B  |       |   N  |   M  |   ,  |   .  |  /   |Shift |
  * '------+------+------+------+------+------'       '------+------+------+------+------+------'
  *               | Super| Alt  |                                   |BSpace| Delt |
  *               '-------------'                                   '-------------'
@@ -205,54 +205,55 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *               .------+------. .-------------.  .-------------. .------+------.
  *               |Space |  [   | |   (  |   {  |  |  }   |  )   | |   ]  |Enter |
  *               '-------------' |------+------|  |------+------| '-------------'
- *                               |L1/Hom|PG/HOM|  |ARROWS|L2/End|
+ *                               |L1/Hom|BSpace|  | Delt |L2/End|
  *                               '-------------'  '-------------'
  *
  * PG/HME: HJKL for page up down, home, end.
- * ARROWS: HJKL for arrow keys.
+ * Esc/Ar: HJKL for arrow keys (tab escapes)
  */
 
 /* Keymap 0: Basic layer
  *
  * .-----------------------------------------.        .-----------------------------------------.
- * | Grv  |   !  |   @  |   #  |   $  |   %  |        |   ^  |   &  |   *  |   -  |   =  |BSpace|
+ * | Grv  |   !  |   @  |   #  |   $  |   %  |        |   ^  |   &  |   *  |   -  |   =  |Insert|
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |        |   Y  |   U  |   I  |   O  |   P  |  \   |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |SftEsc|   A  |   S  |   D  |   F  |   G  |        |   H  |   J  |   K  |   L  |  ;   |  '   |
+ * |Escape|   A  |   S  |   D  |   F  |   G  |        |   H  |   J  |   K  |   L  |  ;   |  '   |
+ * |ARROWS|      |      |      |      |      |        |      |      |      |      |      |      |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |LCtrl |   Z  |   X  |   C  |   V  |   B  |        |   N  |   M  |   ,  |   .  |  /   | Delt |
+ * |LShift|   Z  |   X  |   C  |   V  |   B  |        |   N  |   M  |   ,  |   .  |  /   |SkrLck|
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
- * |      |      |Super | Alt  |      |                      |      |?BSpc |?Delt |      |      |
+ * |      |      |Super |PG/HME|      |                      |      |BSpace| Delt |      |      |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
  *                                |   (  |   {  |  |  }   |  )   |
  *                         .------+------+------|  |------+------+------.
  *                         |      |tap:  |   [  |  |  ]   |tap:  |      |
  *                         |Space | Home |------|  |------| End  |Enter |
- *                         |      | ~L1  |PG/HOM|  |ARROWS| ~L2  |      |
+ *                         |      | ~L1  | Ctrl |  | Alt  | ~L2  |      |
  *                         '--------------------'  '--------------------'
  */
 [LAYER_BASE] = LAYOUT_dactyl(  // layer 0 : default
   /* left hand */
          KC_GRV,        KC_EXLM,          KC_AT,        KC_HASH,         KC_DLR,        KC_PERC,
          KC_TAB,           KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,
-        KC_LSFT,           KC_A,           KC_S,           KC_D,           KC_F,           KC_G,
-        KC_LCTL,           KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,
-        KC_TRNS,        KC_TRNS,        KC_LGUI,        KC_LALT,        KC_TRNS,
+ MO(LAYER_DIRS),           KC_A,           KC_S,           KC_D,           KC_F,           KC_G,
+        KC_LSFT,           KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,
+        KC_TRNS,        KC_TRNS,        KC_LGUI, MO(LAYER_PAGE),        KC_TRNS,
                                                                         KC_LPRN,        KC_LCBR,
                                                                                         KC_LBRC,
-                                                         KC_SPC,          MO(1),          MO(4),
+                                                         KC_SPC, MO(LAYER_KPAD),        KC_LCTL,
 
   /* right hand */
-        KC_CIRC,        KC_AMPR,        KC_ASTR,        KC_MINS,         KC_EQL,        KC_BSPC,
+        KC_CIRC,        KC_AMPR,        KC_ASTR,        KC_MINS,         KC_EQL,         KC_INS,
            KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,        KC_BSLS,
            KC_H,           KC_J,           KC_K,           KC_L,        KC_SCLN,        KC_QUOT,
-           KC_N,           KC_M,        KC_COMM,         KC_DOT,        KC_SLSH,        KC_DELT,
+           KC_N,           KC_M,        KC_COMM,         KC_DOT,        KC_SLSH,        KC_LSFT,
                         KC_TRNS,        KC_BSPC,        KC_DELT,        KC_TRNS,        KC_TRNS,
         KC_RCBR,        KC_RPRN,
         KC_RBRC,
-          MO(5),          MO(2),         KC_ENT
+        KC_LALT, MO(LAYER_MDIA),         KC_ENT
     ),
 /* Keymap 1: KeyPad, Locks & Bracket Pairs
  *
@@ -534,37 +535,33 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 
     if (is_tap) {
-      if (keycode == MO(1)) {
-        if ((layer_state & ~(1UL << 1)) == 0){
+      if (keycode == MO(LAYER_KPAD)) {
+        if ((layer_state & ~(1UL << LAYER_KPAD)) == 0){
           // WITHOUT_SHIFT({SEND_STRING("_");});
           SEND_STRING(SS_TAP(X_HOME));
           return true;
         }
       }
-      else if (keycode == MO(2)) {
-        if ((layer_state & ~(1UL << 2)) == 0){
+      else if (keycode == MO(LAYER_MDIA)) {
+        if ((layer_state & ~(1UL << LAYER_MDIA)) == 0) {
           // WITHOUT_MODS({SEND_STRING("->");});
           SEND_STRING(SS_TAP(X_END));
           return true;
         }
       }
-      else if (keycode == MO(4) ) {
-        if ((layer_state & ~(1UL << 4)) == 0){
-          SEND_STRING(SS_TAP(X_BSPACE));
+      else if (keycode == MO(LAYER_DIRS)) {
+        if ((layer_state & ~(1UL << LAYER_DIRS)) == 0) {
+          SEND_STRING(SS_TAP(X_ESCAPE));
           return true;
         }
       }
-      else if (keycode == MO(5) ) {
-        if ((layer_state & ~(1UL << 5)) == 0){
-          SEND_STRING(SS_TAP(X_DELETE));
-          return true;
-        }
+      else if (keycode == KC_LCTL) {
+        WITHOUT_MOD_BITS(MOD_BIT(KC_LCTL), {SEND_STRING(SS_TAP(X_BSPACE));});
+        return true;
       }
-      else if (keycode == KC_LSFT) {
-        if ((layer_state & ~(1UL << 1)) == 0){
-          WITHOUT_MOD_BITS(MOD_BIT(KC_LSFT), {SEND_STRING(SS_TAP(X_ESCAPE));});
-          return true;
-        }
+      else if (keycode == KC_LALT) {
+        WITHOUT_MOD_BITS(MOD_BIT(KC_LALT), {SEND_STRING(SS_TAP(X_DELETE));});
+        return true;
       }
 
     }
