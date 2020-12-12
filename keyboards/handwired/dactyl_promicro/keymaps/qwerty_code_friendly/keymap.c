@@ -197,7 +197,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|       |------+------+------+------+------+------|
  * |Esc/AR|   A  |   S  |   D  |   F  |   G  |       |   H  |   J  |   K  |   L  |  ;   |  '   |
  * |------+------+------+------+------+------|       |------+------+------+------+------+------|
- * |Ctrl  |   Z  |   X  |   C  |   V  |   B  |       |   N  |   M  |   ,  |   .  |  /   |Shift |
+ * |Shift |   Z  |   X  |   C  |   V  |   B  |       |   N  |   M  |   ,  |   .  |  /   |      |
  * '------+------+------+------+------+------'       '------+------+------+------+------+------'
  *               | Super| Alt  |                                   |BSpace| Delt |
  *               '-------------'                                   '-------------'
@@ -205,7 +205,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *               .------+------. .-------------.  .-------------. .------+------.
  *               |Space |  [   | |   (  |   {  |  |  }   |  )   | |   ]  |Enter |
  *               '-------------' |------+------|  |------+------| '-------------'
- *                               |L1/Hom|BSpace|  | Delt |L2/End|
+ *                               |L1/Hom| Ctrl |  | SkLk |L2/End|
  *                               '-------------'  '-------------'
  *
  * PG/HME: HJKL for page up down, home, end.
@@ -222,16 +222,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |Escape|   A  |   S  |   D  |   F  |   G  |        |   H  |   J  |   K  |   L  |  ;   |  '   |
  * |ARROWS|      |      |      |      |      |        |      |      |      |      |      |      |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |LShift|   Z  |   X  |   C  |   V  |   B  |        |   N  |   M  |   ,  |   .  |  /   |SkrLck|
+ * |Shift |   Z  |   X  |   C  |   V  |   B  |        |   N  |   M  |   ,  |   .  |  /   |      |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
- * |      |      |Super |PG/HME|      |                      |      |BSpace| Delt |      |      |
+ * |      |      |Super | Alt  |      |                      |      |BSpace| Delt |      |      |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
  *                                |   (  |   {  |  |  }   |  )   |
  *                         .------+------+------|  |------+------+------.
  *                         |      |tap:  |   [  |  |  ]   |tap:  |      |
  *                         |Space | Home |------|  |------| End  |Enter |
- *                         |      | ~L1  | Ctrl |  | Alt  | ~L2  |      |
+ *                         |      | ~L1  | Ctrl |  | SkLk | ~L2  |      |
  *                         '--------------------'  '--------------------'
  */
 [LAYER_BASE] = LAYOUT_dactyl(  // layer 0 : default
@@ -240,7 +240,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          KC_TAB,           KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,
  MO(LAYER_DIRS),           KC_A,           KC_S,           KC_D,           KC_F,           KC_G,
         KC_LSFT,           KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,
-        KC_TRNS,        KC_TRNS,        KC_LGUI, MO(LAYER_PAGE),        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_LGUI,        KC_LALT,        KC_TRNS,
                                                                         KC_LPRN,        KC_LCBR,
                                                                                         KC_LBRC,
                                                          KC_SPC, MO(LAYER_KPAD),        KC_LCTL,
@@ -253,7 +253,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                         KC_TRNS,        KC_BSPC,        KC_DELT,        KC_TRNS,        KC_TRNS,
         KC_RCBR,        KC_RPRN,
         KC_RBRC,
-        KC_LALT, MO(LAYER_MDIA),         KC_ENT
+  KC_SCROLLLOCK, MO(LAYER_MDIA),         KC_ENT
     ),
 /* Keymap 1: KeyPad, Locks & Bracket Pairs
  *
@@ -426,7 +426,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,
         KC_TRNS,        KC_TRNS,        KC_TRNS
 ),
-/* Keymap 4: Page
+/* Keymap 5: Arrows
  *
  * .-----------------------------------------.        .-----------------------------------------.
  * |      |      |      |      |      |      |        |      |      |      |      |      |      |
@@ -435,7 +435,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |      |      |      |      |      |      |        | Left | Down | Up   |Right |      |      |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      |      |      |      |      |        |      |      |      |      |      |      |
+ * |      |      |      |      |      |      |        | Home | PgDn | PgUp | End  |      |      |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
  * |      |      |      |      |      |                      |      |      |      |      |      |
  * '----------------------------------'                      '----------------------------------'
@@ -462,7 +462,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
         KC_LEFT,        KC_DOWN,          KC_UP,        KC_RGHT,        KC_TRNS,         KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
+        KC_HOME,        KC_PGDN,        KC_PGUP,         KC_END,        KC_TRNS,         KC_TRNS,
                         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
         KC_TRNS,        KC_TRNS,
         KC_TRNS,
@@ -559,8 +559,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         WITHOUT_MOD_BITS(MOD_BIT(KC_LCTL), {SEND_STRING(SS_TAP(X_BSPACE));});
         return true;
       }
-      else if (keycode == KC_LALT) {
-        WITHOUT_MOD_BITS(MOD_BIT(KC_LALT), {SEND_STRING(SS_TAP(X_DELETE));});
+      else if (keycode == KC_SCROLLLOCK) {
+        SEND_STRING(SS_UP(X_SCROLLLOCK) SS_TAP(X_DELETE));
         return true;
       }
 
