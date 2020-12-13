@@ -215,7 +215,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL,        KC_LGUI,        KC_LALT,        KC_CAPSLOCK,    KC_SLCK,
                                                                         KC_LPRN,        KC_LCBR,
                                                                                         KC_LBRC,
-                                                         KC_SPC,          MO(1),        KC_BSPC,
+                                                         KC_SPC, MO(LAYER_KPAD),        KC_BSPC,
 
   /* right hand */
         KC_CIRC,        KC_AMPR,        KC_ASTR,        KC_MINS,         KC_EQL,         KC_INS,
@@ -225,7 +225,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                         KC_LEFT,        KC_DOWN,          KC_UP,        KC_RGHT,        KC_PGDN,
         KC_RCBR,        KC_RPRN,
         KC_RBRC,
-        KC_DELT,          MO(2),         KC_ENT
+        KC_DELT, MO(LAYER_MDIA),         KC_ENT
     ),
 /* Keymap 1: KeyPad, Locks & Bracket Pairs
  *
@@ -412,15 +412,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 
     if (is_tap) {
-      if (keycode == MO(1)) {
-        if ((layer_state & ~(1UL << 1)) == 0){
+      if (keycode == MO(LAYER_KPAD)) {
+        if ((layer_state & ~(1UL << LAYER_KPAD)) == 0){
           // WITHOUT_SHIFT({SEND_STRING("_");});
           SEND_STRING(SS_TAP(X_HOME));
           return true;
         }
       }
-      else if (keycode == MO(2)) {
-        if ((layer_state & ~(1UL << 2)) == 0){
+      else if (keycode == MO(LAYER_MDIA)) {
+        if ((layer_state & ~(1UL << LAYER_MDIA)) == 0){
           // WITHOUT_MODS({SEND_STRING("->");});
           SEND_STRING(SS_TAP(X_END));
           return true;
