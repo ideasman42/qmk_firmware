@@ -260,11 +260,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * .-----------------------------------------.        .-----------------------------------------.
  * |PrtScn|ScrlLk|CapsLk|Break |      |      |        |      |NumLck|   /  |   *  |   -  |      |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      | Grv  |   *  |   &  |      |        |      |   7  |   8  |   9  |   +  |      |
+ * |      |      |      |      |      |      |        |      |   7  |   8  |   9  |   +  |      |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      |   ^  |   %  |   $  |   _  |        |      |   4  |   5  |   6  |   +  |  ''  |
+ * |      |      |      |      |      |  ->  |        |      |   4  |   5  |   6  |   +  |  ''  |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      |   #  |   @  |   !  |  ->  |        |      |   1  |   2  |   3  | Enter|      |
+ * |      |      |      |      |      |   _  |        |      |   1  |   2  |   3  | Enter|      |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
  * |      |      |      |      |      |                      |   0  |      |   .  | Enter|      |
  * '----------------------------------'                      '----------------------------------'
@@ -280,9 +280,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [LAYER_KPAD] = LAYOUT_dactyl(
   /* left hand */
      KC_PSCREEN,  KC_SCROLLLOCK,    KC_CAPSLOCK,       KC_PAUSE,        KC_TRNS,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,         KC_GRV,        KC_ASTR,        KC_AMPR,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_CIRC,        KC_PERC,         KC_DLR, M_ARROW_RMINUS,
-        KC_TRNS,        KC_TRNS,        KC_HASH,          KC_AT,        KC_EXLM,        KC_UNDS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS, M_ARROW_RMINUS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_UNDS,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
                                                                  M_BRACK_IN_PRN, M_BRACK_IN_CBR,
                                                                                  M_BRACK_IN_BRC,
