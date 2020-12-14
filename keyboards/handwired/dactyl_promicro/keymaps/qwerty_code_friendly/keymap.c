@@ -51,7 +51,8 @@
 #define LAYER_MDIA 2 /* media keys */
 #define LAYER_WORD 3 /* F-Keys & Words */
 #define LAYER_DIRS 4 /* Arrow keys */
-#define LAYER_BLNK 5 /* Blank. */
+#define LAYER_SYMB 5 /* Symbols */
+#define LAYER_BLNK 6 /* Blank. */
 
 enum custom_keycodes {
   /* Ensure these codes start after the highest keycode defined in Quantum. */
@@ -199,7 +200,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|       |------+------+------+------+------+------|
  * |Shift |   Z  |   X  |   C  |   V  |   B  |       |   N  |   M  |   ,  |   .  |  /   | Delt |
  * '------+------+------+------+------+------'       '------+------+------+------+------+------'
- *               |Super |SkrLck|                                   | PgUp | PgDn |
+ *               |Super |ScrLck|                                   | PgUp | PgDn |
  *               '-------------'                                   '-------------'
  *
  *               .------+------. .-------------.  .-------------. .------+------.
@@ -219,11 +220,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |        |   Y  |   U  |   I  |   O  |   P  |  \   |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |Esc/Ar|   A  |   S  |   D  |   F  |   G  |        |   H  |   J  |   K  |   L  |  ;   |  '   |
+ * |Esc/AR|   A  |   S  |   D  |   F  |   G  |        |   H  |   J  |   K  |   L  |  ;   |  '   |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |Shift |   Z  |   X  |   C  |   V  |   B  |        |   N  |   M  |   ,  |   .  |  /   | Delt |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
- * |      |      |Super |SkrLck|      |                      |      | PgUp | PgDn |      |      |
+ * |      |      |Super |ScrLck|      |                      |      | PgUp | PgDn |      |      |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
  *                                |   (  |   {  |  |  }   |  )   |
@@ -291,7 +292,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,        KC_KP_7,        KC_KP_8,        KC_KP_9,     KC_KP_PLUS,        KC_TRNS,
         KC_TRNS,        KC_KP_4,        KC_KP_5,        KC_KP_6,     KC_KP_PLUS,   M_QUOTE_PAIR,
         KC_TRNS,        KC_KP_1,        KC_KP_2,        KC_KP_3,    KC_KP_ENTER,        KC_TRNS,
-                        KC_TRNS,        KC_TRNS,        KC_KP_DOT,  KC_KP_ENTER,        KC_TRNS,
+                        KC_TRNS,        KC_TRNS,      KC_KP_DOT,    KC_KP_ENTER,        KC_TRNS,
        M_BRACK_OUT_CBR, M_BRACK_OUT_PRN,
        M_BRACK_OUT_BRC,
        KC_TRNS,         KC_TRNS,     KC_KP_0
@@ -430,6 +431,50 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * .-----------------------------------------.        .-----------------------------------------.
  * |      |      |      |      |      |      |        |      |      |      |      |      |      |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |        |      |   &  |   *  |   -  |   =  |      |
+ * |------+------+------+------+------+------|        |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |        |      |   ^  |   %  |   $  |      |      |
+ * |------+------+------+------+------+------|        |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |        |      |   !  |   @  |   #  |      |      |
+ * |------+------+------+------+------+------'        '------+------+------+------+------+------|
+ * |      |      |      |      |      |                      |      |      |      |      |      |
+ * '----------------------------------'                      '----------------------------------'
+ *                                .-------------.  .-------------.
+ *                                |      |      |  |      |      |
+ *                         .------+------+------|  |------+------+------.
+ *                         |      |      |      |  |      |      |      |
+ *                         |      |      |------|  |------|      | Grv  |
+ *                         |      |      |      |  |      |      |      |
+ *                         '--------------------'  '--------------------'
+ */
+// Symbols.
+[LAYER_SYMB] = LAYOUT_dactyl(
+  /* left hand */
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+                                                                        KC_TRNS,         KC_TRNS,
+                                                                                         KC_TRNS,
+                                                        KC_TRNS,        KC_TRNS,         KC_TRNS,
+  /* right hand */
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
+        KC_TRNS,        KC_AMPR,        KC_ASTR,        KC_MINS,         KC_EQL,         KC_TRNS,
+        KC_TRNS,        KC_CIRC,        KC_PERC,         KC_DLR,        KC_TRNS,         KC_TRNS,
+        KC_TRNS,        KC_EXLM,          KC_AT,        KC_HASH,        KC_TRNS,         KC_TRNS,
+                        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
+        KC_TRNS,        KC_TRNS,
+        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS
+),
+
+
+/* Keymap 6: Blank
+ *
+ * .-----------------------------------------.        .-----------------------------------------.
+ * |      |      |      |      |      |      |        |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |      |      |      |      |      |      |        |      |      |      |      |      |      |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |      |      |      |      |      |      |        | Home | PgDn | PgUp | End  |      |      |
@@ -460,9 +505,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* right hand */
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-        KC_HOME,        KC_PGDN,        KC_PGUP,         KC_END,        KC_TRNS,         KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
-                        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
+        KC_HOME,        KC_PGDN,        KC_PGUP,         KC_END,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+                        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
         KC_TRNS,        KC_TRNS,
         KC_TRNS,
         KC_TRNS,        KC_TRNS,        KC_TRNS
