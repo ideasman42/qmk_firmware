@@ -660,10 +660,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case M_QUOTE_PAIR:  /* '' */
       if (record->event.pressed) {
-        if (keyboard_report->mods & (MOD_BIT(KC_RSFT) | MOD_BIT(KC_LSFT))) {
-          WITHOUT_MODS({
-              SEND_STRING("\"\"" SS_TAP(X_LEFT));
-            });
+        if (keyboard_report->mods & (MOD_BIT(KC_LSFT) | MOD_BIT(KC_RSFT))) {
+          const uint8_t mods = keyboard_report->mods;
+          SEND_STRING(SS_TAP(X_QUOTE) SS_TAP(X_QUOTE));
+
+          if (mods & MOD_BIT(KC_LSFT)) {SEND_STRING(SS_UP(X_LSHIFT));}
+          if (mods & MOD_BIT(KC_RSFT)) {SEND_STRING(SS_UP(X_RSHIFT));}
+
+          SEND_STRING(SS_TAP(X_LEFT));
+
+          if (mods & MOD_BIT(KC_LSFT)) {SEND_STRING(SS_DOWN(X_LSHIFT));}
+          if (mods & MOD_BIT(KC_RSFT)) {SEND_STRING(SS_DOWN(X_RSHIFT));}
+
           return false;
         }
         else {
