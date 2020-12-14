@@ -191,15 +191,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
  * .-----------------------------------------.       .-----------------------------------------.
- * | Grv  |   !  |   @  |   #  |   $  |   %  |       |   ^  |   &  |   *  |   -  |   =  | PgUp |
+ * | Grv  |   !  |   @  |   #  |   $  |   %  |       |   ^  |   &  |   *  |   -  |   =  |BSpace|
  * |------+------+------+------+------+------|       |------+------+------+------+------+------|
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |       |   Y  |   U  |   I  |   O  |   P  |  \   |
  * |------+------+------+------+------+------|       |------+------+------+------+------+------|
  * |Esc/AR|   A  |   S  |   D  |   F  |   G  |       |   H  |   J  |   K  |   L  |  ;   |  '   |
  * |------+------+------+------+------+------|       |------+------+------+------+------+------|
- * |Shift |   Z  |   X  |   C  |   V  |   B  |       |   N  |   M  |   ,  |   .  |  /   | PgDn |
+ * |Shift |   Z  |   X  |   C  |   V  |   B  |       |   N  |   M  |   ,  |   .  |  /   | Delt |
  * '------+------+------+------+------+------'       '------+------+------+------+------+------'
- *               |Super |SkrLck|                                   |BSpace| Delt |
+ *               |Super |SkrLck|                                   | PgUp | PgDn |
  *               '-------------'                                   '-------------'
  *
  *               .------+------. .-------------.  .-------------. .------+------.
@@ -215,15 +215,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
  * .-----------------------------------------.        .-----------------------------------------.
- * | Grv  |   !  |   @  |   #  |   $  |   %  |        |   ^  |   &  |   *  |   -  |   =  | PgUp |
+ * | Grv  |   !  |   @  |   #  |   $  |   %  |        |   ^  |   &  |   *  |   -  |   =  |BSpace|
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |        |   Y  |   U  |   I  |   O  |   P  |  \   |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |Esc/Ar|   A  |   S  |   D  |   F  |   G  |        |   H  |   J  |   K  |   L  |  ;   |  '   |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |Shift |   Z  |   X  |   C  |   V  |   B  |        |   N  |   M  |   ,  |   .  |  /   | PgDn |
+ * |Shift |   Z  |   X  |   C  |   V  |   B  |        |   N  |   M  |   ,  |   .  |  /   | Delt |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
- * |      |      |Super |SkrLck|      |                      |      |BSpace| Delt |      |      |
+ * |      |      |Super |SkrLck|      |                      |      | PgUp | PgDn |      |      |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
  *                                |   (  |   {  |  |  }   |  )   |
@@ -245,11 +245,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                          KC_SPC, MO(LAYER_KPAD),       KC_LCTRL,
 
   /* right hand */
-        KC_CIRC,        KC_AMPR,        KC_ASTR,        KC_MINS,         KC_EQL,        KC_PGUP,
+        KC_CIRC,        KC_AMPR,        KC_ASTR,        KC_MINS,         KC_EQL,        KC_BSPC,
            KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,        KC_BSLS,
            KC_H,           KC_J,           KC_K,           KC_L,        KC_SCLN,        KC_QUOT,
-           KC_N,           KC_M,        KC_COMM,         KC_DOT,        KC_SLSH,        KC_LSFT,
-                        KC_TRNS,        KC_BSPC,        KC_DELT,        KC_TRNS,        KC_PGDN,
+           KC_N,           KC_M,        KC_COMM,         KC_DOT,        KC_SLSH,        KC_DELT,
+                        KC_TRNS,        KC_PGUP,        KC_PGDN,        KC_TRNS,        KC_TRNS,
         KC_RCBR,        KC_RPRN,
         KC_RBRC,
         KC_LALT, MO(LAYER_MDIA),         KC_ENT
