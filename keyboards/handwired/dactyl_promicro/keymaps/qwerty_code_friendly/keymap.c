@@ -50,8 +50,8 @@
 #define LAYER_KPAD 1 /* keypad */
 #define LAYER_MDIA 2 /* media keys */
 #define LAYER_WORD 3 /* F-Keys & Words */
-#define LAYER_PAGE 4 /* Page/Home keys */
-#define LAYER_DIRS 5 /* Arrow keys */
+#define LAYER_DIRS 4 /* Arrow keys */
+#define LAYER_BLNK 5 /* Blank. */
 
 enum custom_keycodes {
   /* Ensure these codes start after the highest keycode defined in Quantum. */
@@ -191,21 +191,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
  * .-----------------------------------------.       .-----------------------------------------.
- * | Grv  |   !  |   @  |   #  |   $  |   %  |       |   ^  |   &  |   *  |   -  |   =  |Insert|
+ * | Grv  |   !  |   @  |   #  |   $  |   %  |       |   ^  |   &  |   *  |   -  |   =  | PgUp |
  * |------+------+------+------+------+------|       |------+------+------+------+------+------|
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |       |   Y  |   U  |   I  |   O  |   P  |  \   |
  * |------+------+------+------+------+------|       |------+------+------+------+------+------|
  * |Esc/AR|   A  |   S  |   D  |   F  |   G  |       |   H  |   J  |   K  |   L  |  ;   |  '   |
  * |------+------+------+------+------+------|       |------+------+------+------+------+------|
- * |Shift |   Z  |   X  |   C  |   V  |   B  |       |   N  |   M  |   ,  |   .  |  /   |      |
+ * |Shift |   Z  |   X  |   C  |   V  |   B  |       |   N  |   M  |   ,  |   .  |  /   | PgDn |
  * '------+------+------+------+------+------'       '------+------+------+------+------+------'
- *               | Super| Alt  |                                   |BSpace| Delt |
+ *               |Super |SkrLck|                                   |BSpace| Delt |
  *               '-------------'                                   '-------------'
  *
  *               .------+------. .-------------.  .-------------. .------+------.
  *               |Space |  [   | |   (  |   {  |  |  }   |  )   | |   ]  |Enter |
  *               '-------------' |------+------|  |------+------| '-------------'
- *                               |L1/Hom| Ctrl |  | SkLk |L2/End|
+ *                               |L1/Hom| Ctrl |  | Alt  |L2/End|
  *                               '-------------'  '-------------'
  *
  * PG/HME: HJKL for page up down, home, end.
@@ -215,23 +215,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
  * .-----------------------------------------.        .-----------------------------------------.
- * | Grv  |   !  |   @  |   #  |   $  |   %  |        |   ^  |   &  |   *  |   -  |   =  |Insert|
+ * | Grv  |   !  |   @  |   #  |   $  |   %  |        |   ^  |   &  |   *  |   -  |   =  | PgUp |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |        |   Y  |   U  |   I  |   O  |   P  |  \   |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |Escape|   A  |   S  |   D  |   F  |   G  |        |   H  |   J  |   K  |   L  |  ;   |  '   |
- * |ARROWS|      |      |      |      |      |        |      |      |      |      |      |      |
+ * |Esc/Ar|   A  |   S  |   D  |   F  |   G  |        |   H  |   J  |   K  |   L  |  ;   |  '   |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |Shift |   Z  |   X  |   C  |   V  |   B  |        |   N  |   M  |   ,  |   .  |  /   |      |
+ * |Shift |   Z  |   X  |   C  |   V  |   B  |        |   N  |   M  |   ,  |   .  |  /   | PgDn |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
- * |      |      |Super | Alt  |      |                      |      |BSpace| Delt |      |      |
+ * |      |      |Super |SkrLck|      |                      |      |BSpace| Delt |      |      |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
  *                                |   (  |   {  |  |  }   |  )   |
  *                         .------+------+------|  |------+------+------.
  *                         |      |tap:  |   [  |  |  ]   |tap:  |      |
  *                         |Space | Home |------|  |------| End  |Enter |
- *                         |      | ~L1  | Ctrl |  | SkLk | ~L2  |      |
+ *                         |      | ~L1  | Ctrl |  | Alt  | ~L2  |      |
  *                         '--------------------'  '--------------------'
  */
 [LAYER_BASE] = LAYOUT_dactyl(  // layer 0 : default
@@ -240,20 +239,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          KC_TAB,           KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,
  MO(LAYER_DIRS),           KC_A,           KC_S,           KC_D,           KC_F,           KC_G,
         KC_LSFT,           KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,
-        KC_TRNS,        KC_TRNS,        KC_LGUI,        KC_LALT,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_LGUI,        KC_SLCK,        KC_TRNS,
                                                                         KC_LPRN,        KC_LCBR,
                                                                                         KC_LBRC,
-                                                         KC_SPC, MO(LAYER_KPAD),        KC_LCTL,
+                                                         KC_SPC, MO(LAYER_KPAD),       KC_LCTRL,
 
   /* right hand */
-        KC_CIRC,        KC_AMPR,        KC_ASTR,        KC_MINS,         KC_EQL,         KC_INS,
+        KC_CIRC,        KC_AMPR,        KC_ASTR,        KC_MINS,         KC_EQL,        KC_PGUP,
            KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,        KC_BSLS,
            KC_H,           KC_J,           KC_K,           KC_L,        KC_SCLN,        KC_QUOT,
            KC_N,           KC_M,        KC_COMM,         KC_DOT,        KC_SLSH,        KC_LSFT,
-                        KC_TRNS,        KC_BSPC,        KC_DELT,        KC_TRNS,        KC_TRNS,
+                        KC_TRNS,        KC_BSPC,        KC_DELT,        KC_TRNS,        KC_PGDN,
         KC_RCBR,        KC_RPRN,
         KC_RBRC,
-  KC_SCROLLLOCK, MO(LAYER_MDIA),         KC_ENT
+        KC_LALT, MO(LAYER_MDIA),         KC_ENT
     ),
 /* Keymap 1: KeyPad, Locks & Bracket Pairs
  *
@@ -266,13 +265,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |      |      |      |      |      |   _  |        |      |   1  |   2  |   3  | Enter|      |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
- * |      |      |      |      |      |                      |   0  |      |   .  | Enter|      |
+ * |      |      |      |      |      |                      |      |      |   .  | Enter|      |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
  *                                |  ()  |  {}  |  |  }{  |  )(  |
  *                         .------+------+------|  |------+------+------.
  *                         |      |      |  []  |  |  ][  |      |      |
- *                         |      |      |------|  |------|      |      |
+ *                         |      |      |------|  |------|      |  0   |
  *                         |      |      |      |  |      |      |      |
  *                         '--------------------'  '--------------------'
  */
@@ -292,10 +291,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,        KC_KP_7,        KC_KP_8,        KC_KP_9,     KC_KP_PLUS,        KC_TRNS,
         KC_TRNS,        KC_KP_4,        KC_KP_5,        KC_KP_6,     KC_KP_PLUS,   M_QUOTE_PAIR,
         KC_TRNS,        KC_KP_1,        KC_KP_2,        KC_KP_3,    KC_KP_ENTER,        KC_TRNS,
-                        KC_KP_0,        KC_TRNS,        KC_KP_DOT,  KC_KP_ENTER,        KC_TRNS,
+                        KC_TRNS,        KC_TRNS,        KC_KP_DOT,  KC_KP_ENTER,        KC_TRNS,
        M_BRACK_OUT_CBR, M_BRACK_OUT_PRN,
        M_BRACK_OUT_BRC,
-       KC_TRNS,         KC_TRNS,     KC_TRNS
+       KC_TRNS,         KC_TRNS,     KC_KP_0
 ),
 /* Keymap 2: FKeys, macro, media & mouse keys
  *
@@ -308,13 +307,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |      |      | Rclk | Mclk | Lclk |MWhlDn|        |VolDn |  F1  |  F2  |  F3  |      |      |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
- * |      |      |      |      |      |                      |  F13 |  F14 |  F15 |  F16 |      |
+ * |      |      |      |      |      |                      |      |  F14 |  F15 |  F16 |      |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
  *                                | Rec1 | Rec2 |  | MRwd | MFwd |
  *                         .------+------+------|  |------+------+------.
  *                         |      |      | Run1 |  | MPrv |      |      |
- *                         | Stop |      |------|  |------|      |      |
+ *                         | Stop |      |------|  |------|      | F13  |
  *                         |      |      | Run2 |  | MNxt |      |      |
  *                         '--------------------'  '--------------------'
  *
@@ -335,10 +334,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_MPLY,          KC_F7,          KC_F8,          KC_F9,        KC_TRNS,        KC_MENU,
         KC_VOLU,          KC_F4,          KC_F5,          KC_F6,        KC_TRNS,  KC_WWW_SEARCH,
         KC_VOLD,          KC_F1,          KC_F2,          KC_F3,        KC_TRNS,        KC_TRNS,
-                         KC_F13,         KC_F14,         KC_F15,         KC_F16,        KC_TRNS,
+                        KC_TRNS,         KC_F14,         KC_F15,         KC_F16,        KC_TRNS,
         KC_MRWD,        KC_MFFD,
         KC_MPRV,
-        KC_MNXT,        KC_TRNS,        KC_TRNS
+        KC_MNXT,        KC_TRNS,         KC_F13
 ),
 /* Keymap 3: Entire Words (one for each key) & Numbers
  *
@@ -383,50 +382,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,        KC_TRNS,        KC_TRNS
 ),
 
-
-/* Keymap 4: Page
- *
- * .-----------------------------------------.        .-----------------------------------------.
- * |      |      |      |      |      |      |        |      |      |      |      |      |      |
- * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      |      |      |      |      |        |      |      |      |      |      |      |
- * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      |      |      |      |      |        | Home | PgDn | PgUp | End  |      |      |
- * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      |      |      |      |      |        |      |      |      |      |      |      |
- * |------+------+------+------+------+------'        '------+------+------+------+------+------|
- * |      |      |      |      |      |                      |      |      |      |      |      |
- * '----------------------------------'                      '----------------------------------'
- *                                .-------------.  .-------------.
- *                                |      |      |  |      |      |
- *                         .------+------+------|  |------+------+------.
- *                         |      |      |      |  |      |      |      |
- *                         |      |      |------|  |------|      |      |
- *                         |      |      |      |  |      |      |      |
- *                         '--------------------'  '--------------------'
- */
-// Page keys & home/end.
-[LAYER_PAGE] = LAYOUT_dactyl(
-  /* left hand */
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-                                                                        KC_TRNS,         KC_TRNS,
-                                                                                         KC_TRNS,
-                                                        KC_TRNS,        KC_TRNS,         KC_TRNS,
-  /* right hand */
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-        KC_HOME,        KC_PGDN,        KC_PGUP,         KC_END,        KC_TRNS,         KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
-                        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
-        KC_TRNS,        KC_TRNS,
-        KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_TRNS
-),
-/* Keymap 5: Arrows
+/* Keymap 4: Arrows
  *
  * .-----------------------------------------.        .-----------------------------------------.
  * |      |      |      |      |      |      |        |      |      |      |      |      |      |
@@ -463,6 +419,49 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
         KC_LEFT,        KC_DOWN,          KC_UP,        KC_RGHT,        KC_TRNS,         KC_TRNS,
         KC_HOME,        KC_PGDN,        KC_PGUP,         KC_END,        KC_TRNS,         KC_TRNS,
+                        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
+        KC_TRNS,        KC_TRNS,
+        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS
+),
+
+/* Keymap 5: Blank
+ *
+ * .-----------------------------------------.        .-----------------------------------------.
+ * |      |      |      |      |      |      |        |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|        |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |        |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|        |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |        | Home | PgDn | PgUp | End  |      |      |
+ * |------+------+------+------+------+------|        |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |        |      |      |      |      |      |      |
+ * |------+------+------+------+------+------'        '------+------+------+------+------+------|
+ * |      |      |      |      |      |                      |      |      |      |      |      |
+ * '----------------------------------'                      '----------------------------------'
+ *                                .-------------.  .-------------.
+ *                                |      |      |  |      |      |
+ *                         .------+------+------|  |------+------+------.
+ *                         |      |      |      |  |      |      |      |
+ *                         |      |      |------|  |------|      |      |
+ *                         |      |      |      |  |      |      |      |
+ *                         '--------------------'  '--------------------'
+ */
+// Blank.
+[LAYER_BLNK] = LAYOUT_dactyl(
+  /* left hand */
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+                                                                        KC_TRNS,         KC_TRNS,
+                                                                                         KC_TRNS,
+                                                        KC_TRNS,        KC_TRNS,         KC_TRNS,
+  /* right hand */
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_HOME,        KC_PGDN,        KC_PGUP,         KC_END,        KC_TRNS,         KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
                         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
         KC_TRNS,        KC_TRNS,
         KC_TRNS,
@@ -555,14 +554,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           return true;
         }
       }
+#if 0 /* Interesting but not good for gaining new muscle memory. */
+      else if (keycode == KC_LALT) {
+        SEND_STRING(SS_UP(X_LATL) SS_TAP(X_DELETE));
+        WITHOUT_MOD_BITS(MOD_BIT(KC_LALT), {SEND_STRING(SS_TAP(X_DELETE));});
+        return true;
+      }
       else if (keycode == KC_LCTL) {
         WITHOUT_MOD_BITS(MOD_BIT(KC_LCTL), {SEND_STRING(SS_TAP(X_BSPACE));});
         return true;
       }
-      else if (keycode == KC_SCROLLLOCK) {
-        SEND_STRING(SS_UP(X_SCROLLLOCK) SS_TAP(X_DELETE));
-        return true;
-      }
+#endif
 
     }
   }
