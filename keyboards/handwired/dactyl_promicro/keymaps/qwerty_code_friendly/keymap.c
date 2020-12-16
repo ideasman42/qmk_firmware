@@ -540,9 +540,11 @@ static struct {
 #define WITHOUT_SHIFT(...) \
   do { \
     uint8_t _real_mods = get_mods(); \
-    del_mods(MOD_BIT(KC_LSFT)); \
+    if (_real_mods & MOD_BIT(KC_LSFT)) { SEND_STRING(SS_UP(X_LSHIFT)); } \
+    if (_real_mods & MOD_BIT(KC_RSFT)) { SEND_STRING(SS_UP(X_RSHIFT)); } \
     { __VA_ARGS__ } \
-    set_mods(_real_mods); \
+    if (_real_mods & MOD_BIT(KC_LSFT)) { SEND_STRING(SS_DOWN(X_LSHIFT)); } \
+    if (_real_mods & MOD_BIT(KC_RSFT)) { SEND_STRING(SS_DOWN(X_RSHIFT)); } \
   } while (0)
 
 #define WITHOUT_MOD_BITS(mods, ...) \
@@ -633,8 +635,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case M_BRACK_IN_BRC:  /* [] */
       if (record->event.pressed) {
         if (keyboard_report->mods & (MOD_BIT(KC_RSFT) | MOD_BIT(KC_LSFT))) {
-          WITHOUT_MODS({
-            SEND_STRING("{}" SS_TAP(X_LEFT));
+          SEND_STRING("{}");
+          WITHOUT_SHIFT({
+            SEND_STRING(SS_TAP(X_LEFT));
           });
         }
         else {
@@ -664,8 +667,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case M_BRACK_OUT_BRC:  /* ][ */
       if (record->event.pressed) {
         if (keyboard_report->mods & (MOD_BIT(KC_RSFT) | MOD_BIT(KC_LSFT))) {
-          WITHOUT_MODS({
-            SEND_STRING("}{" SS_TAP(X_LEFT));
+          SEND_STRING("}{");
+          WITHOUT_SHIFT({
+            SEND_STRING(SS_TAP(X_LEFT));
           });
         }
         else {
@@ -707,17 +711,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case M_QUOTE_PAIR:  /* '' */
       if (record->event.pressed) {
         if (keyboard_report->mods & (MOD_BIT(KC_LSFT) | MOD_BIT(KC_RSFT))) {
-          const uint8_t mods = keyboard_report->mods;
           SEND_STRING(SS_TAP(X_QUOTE) SS_TAP(X_QUOTE));
-
-          if (mods & MOD_BIT(KC_LSFT)) {SEND_STRING(SS_UP(X_LSHIFT));}
-          if (mods & MOD_BIT(KC_RSFT)) {SEND_STRING(SS_UP(X_RSHIFT));}
-
-          SEND_STRING(SS_TAP(X_LEFT));
-
-          if (mods & MOD_BIT(KC_LSFT)) {SEND_STRING(SS_DOWN(X_LSHIFT));}
-          if (mods & MOD_BIT(KC_RSFT)) {SEND_STRING(SS_DOWN(X_RSHIFT));}
-
+          WITHOUT_SHIFT({
+            SEND_STRING(SS_TAP(X_LEFT));
+          });
           return false;
         }
         else {
