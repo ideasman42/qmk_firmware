@@ -71,6 +71,7 @@ enum custom_keycodes {
   M_ARROW_REQL,
   M_ARROW_LEQL,
   M_QUOTE_PAIR,
+  M_BTICK_PAIR,
 
   /* allow user defined words for each character:
    * use CFQ_WORD_[A-Z] defines. */
@@ -258,7 +259,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 1: KeyPad, Locks & Bracket Pairs
  *
  * .-----------------------------------------.        .-----------------------------------------.
- * |PrtScn|ScrlLk|CapsLk|Break |      |      |        |      |NumLck|   /  |   *  |   -  |      |
+ * |  ``  |PrtScn|ScrlLk|CapsLk|Break |      |        |      |NumLck|   /  |   *  |   -  |      |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |      |      |      |      |      |      |        |      |   7  |   8  |   9  |   +  |      |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
@@ -279,7 +280,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // SYMBOLS
 [LAYER_KPAD] = LAYOUT_dactyl(
   /* left hand */
-     KC_PSCREEN,  KC_SCROLLLOCK,    KC_CAPSLOCK,       KC_PAUSE,        KC_TRNS,        KC_TRNS,
+   M_BTICK_PAIR,     KC_PSCREEN,  KC_SCROLLLOCK,    KC_CAPSLOCK,       KC_PAUSE,        KC_TRNS,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS, M_ARROW_RMINUS,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_UNDS,
@@ -720,10 +721,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           return false;
         }
         else {
-          SEND_STRING("''" SS_TAP(X_LEFT));
+          WITHOUT_MODS({
+            SEND_STRING("''" SS_TAP(X_LEFT));
+          });
           return false;
         }
 
+        return false;
+      }
+      break;
+
+    case M_BTICK_PAIR:  /* `` */
+      if (record->event.pressed) {
+        SEND_STRING("``" SS_TAP(X_LEFT));
         return false;
       }
       break;
