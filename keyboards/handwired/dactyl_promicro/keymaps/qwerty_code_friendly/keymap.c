@@ -267,7 +267,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |      |      |      |      |      |   _  |        |      |   1  |   2  |   3  | Enter|      |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
- * |      |      |  ()  |      |      |                      |      |  []  |   .  | Enter|      |
+ * |      |      |  ()  |  )(  |      |                      |      |      |   .  | Enter|      |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
  *                                |      |      |  |      |      |
@@ -284,19 +284,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS, M_ARROW_RMINUS,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_UNDS,
-        KC_TRNS,        KC_TRNS, M_BRACK_IN_PRN,        KC_TRNS,        KC_TRNS,
-                                                                 M_BRACK_IN_PRN, M_BRACK_IN_CBR,
-                                                                                 M_BRACK_IN_BRC,
+        KC_TRNS,        KC_TRNS, M_BRACK_IN_PRN,M_BRACK_OUT_PRN,        KC_TRNS,
+                                                                        KC_TRNS,        KC_TRNS,
+                                                                                        KC_TRNS,
                                                         KC_TRNS,        KC_TRNS,        KC_TRNS,
   /* right hand */
         KC_TRNS,        KC_NLCK,    KC_KP_SLASH, KC_KP_ASTERISK,    KC_KP_MINUS,        KC_TRNS,
         KC_TRNS,        KC_KP_7,        KC_KP_8,        KC_KP_9,     KC_KP_PLUS,        KC_TRNS,
         KC_TRNS,        KC_KP_4,        KC_KP_5,        KC_KP_6,     KC_KP_PLUS,   M_QUOTE_PAIR,
         KC_TRNS,        KC_KP_1,        KC_KP_2,        KC_KP_3,    KC_KP_ENTER,        KC_TRNS,
-                        KC_TRNS, M_BRACK_IN_BRC,      KC_KP_DOT,    KC_KP_ENTER,        KC_TRNS,
-       M_BRACK_OUT_CBR, M_BRACK_OUT_PRN,
-       M_BRACK_OUT_BRC,
-       KC_TRNS,         KC_TRNS,     KC_KP_0
+                        KC_TRNS,        KC_TRNS,      KC_KP_DOT,    KC_KP_ENTER,        KC_TRNS,
+        KC_TRNS, KC_TRNS,
+        KC_TRNS,
+        KC_TRNS,        KC_TRNS,     KC_KP_0
 ),
 /* Keymap 2: FKeys, macro, media & mouse keys
  *
@@ -309,7 +309,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |      |      | Rclk | Mclk | Lclk |MWhlDn|        |VolDn |  F1  |  F2  |  F3  |      |      |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
- * |      |      |      |      |      |                      |      |  F14 |  F15 |  F16 |      |
+ * |      |      |      |      |      |                      |      |  []  |  ][  |      |      |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
  *                                | Rec1 | Rec2 |  | MRwd | MFwd |
@@ -336,7 +336,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_MPLY,          KC_F7,          KC_F8,          KC_F9,        KC_TRNS,        KC_MENU,
         KC_VOLU,          KC_F4,          KC_F5,          KC_F6,        KC_TRNS,  KC_WWW_SEARCH,
         KC_VOLD,          KC_F1,          KC_F2,          KC_F3,        KC_TRNS,        KC_TRNS,
-                        KC_TRNS,         KC_F14,         KC_F15,         KC_F16,        KC_TRNS,
+                        KC_TRNS, M_BRACK_IN_BRC,M_BRACK_OUT_BRC,        KC_TRNS,        KC_TRNS,
         KC_MRWD,        KC_MFFD,
         KC_MPRV,
         KC_MNXT,        KC_TRNS,         KC_F13
@@ -672,9 +672,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case M_BRACK_OUT_BRC:  /* ][ */
       if (record->event.pressed) {
         if (keyboard_report->mods & (MOD_BIT(KC_RSFT) | MOD_BIT(KC_LSFT))) {
-          WITHOUT_MODS({
-            SEND_STRING("}{" SS_TAP(X_LEFT));
-          });
+          const uint8_t mods = keyboard_report->mods;
+
+          SEND_STRING("}{");
+
+          if (mods & MOD_BIT(KC_LSFT)) {SEND_STRING(SS_UP(X_LSHIFT));}
+          if (mods & MOD_BIT(KC_RSFT)) {SEND_STRING(SS_UP(X_RSHIFT));}
+
+          SEND_STRING(SS_TAP(X_LEFT));
+
+          if (mods & MOD_BIT(KC_LSFT)) {SEND_STRING(SS_DOWN(X_LSHIFT));}
+          if (mods & MOD_BIT(KC_RSFT)) {SEND_STRING(SS_DOWN(X_RSHIFT));}
         }
         else {
           SEND_STRING("][" SS_TAP(X_LEFT));
