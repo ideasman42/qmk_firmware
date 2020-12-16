@@ -267,7 +267,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |      |      |      |      |      |   _  |        |      |   1  |   2  |   3  | Enter|      |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
- * |      |      |  ()  |  )(  |      |                      |      |      |   .  | Enter|      |
+ * |      |      |  ()  |      |      |                      |      |  []  |   .  | Enter|      |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
  *                                |      |      |  |      |      |
@@ -284,7 +284,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS, M_ARROW_RMINUS,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_UNDS,
-        KC_TRNS,        KC_TRNS, M_BRACK_IN_PRN,M_BRACK_OUT_PRN,        KC_TRNS,
+        KC_TRNS,        KC_TRNS, M_BRACK_IN_PRN,        KC_TRNS,        KC_TRNS,
                                                                         KC_TRNS,        KC_TRNS,
                                                                                         KC_TRNS,
                                                         KC_TRNS,        KC_TRNS,        KC_TRNS,
@@ -293,7 +293,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,        KC_KP_7,        KC_KP_8,        KC_KP_9,     KC_KP_PLUS,        KC_TRNS,
         KC_TRNS,        KC_KP_4,        KC_KP_5,        KC_KP_6,     KC_KP_PLUS,   M_QUOTE_PAIR,
         KC_TRNS,        KC_KP_1,        KC_KP_2,        KC_KP_3,    KC_KP_ENTER,        KC_TRNS,
-                        KC_TRNS,        KC_TRNS,      KC_KP_DOT,    KC_KP_ENTER,        KC_TRNS,
+                        KC_TRNS, M_BRACK_IN_BRC,      KC_KP_DOT,    KC_KP_ENTER,        KC_TRNS,
         KC_TRNS, KC_TRNS,
         KC_TRNS,
         KC_TRNS,        KC_TRNS,     KC_KP_0
