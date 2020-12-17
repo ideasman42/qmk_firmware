@@ -204,11 +204,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *               |Super |ScrLck|                                   | PgUp | PgDn |
  *               '-------------'                                   '-------------'
  *
- *               .------+------. .-------------.  .-------------. .------+------.
- *               |Space |  [   | |   (  |   {  |  |  }   |  )   | |   ]  |Enter |
- *               '-------------' |------+------|  |------+------| '-------------'
- *                               |L1/Hom| Ctrl |  | Alt  |L2/End|
- *                               '-------------'  '-------------'
+ *               .------+------. .-------------.   .-------------. .------+------.
+ *               |Space |  [   | |   (  |   {  |   |  }   |  )   | |   ]  |Enter |
+ *               '-------------' |------+------|   |------+------| '-------------'
+ *                               |L1/Hom| Ctrl |   | Alt  |L2/End|
+ *                               '-------------'   '-------------'
  *
  * PG/HME: HJKL for page up down, home, end.
  * Esc/Ar: HJKL for arrow keys (tab escapes)
@@ -365,20 +365,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // MEDIA AND MOUSE
 [LAYER_WORD] = LAYOUT_dactyl(
   /* left hand */
-        KC_TRNS,           KC_1,           KC_2,           KC_3,           KC_4,            KC_5,
-        KC_TRNS,       M_WORD_Q,       M_WORD_W,       M_WORD_E,       M_WORD_R,        M_WORD_T,
-        KC_TRNS,       M_WORD_A,       M_WORD_S,       M_WORD_D,       M_WORD_F,        M_WORD_G,
-        KC_TRNS,       M_WORD_Z,       M_WORD_X,       M_WORD_C,       M_WORD_V,        M_WORD_B,
+        KC_TRNS,           KC_1,           KC_2,           KC_3,           KC_4,           KC_5,
+        KC_TRNS,       M_WORD_Q,       M_WORD_W,       M_WORD_E,       M_WORD_R,       M_WORD_T,
+        KC_TRNS,       M_WORD_A,       M_WORD_S,       M_WORD_D,       M_WORD_F,       M_WORD_G,
+        KC_TRNS,       M_WORD_Z,       M_WORD_X,       M_WORD_C,       M_WORD_V,       M_WORD_B,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-                                                                        KC_TRNS,         KC_TRNS,
-                                                                                         KC_TRNS,
-                                                        KC_TRNS,        KC_TRNS,         KC_TRNS,
+                                                                        KC_TRNS,        KC_TRNS,
+                                                                                        KC_TRNS,
+                                                        KC_TRNS,        KC_TRNS,        KC_TRNS,
   /* right hand */
-           KC_6,           KC_7,           KC_8,           KC_9,           KC_0,         KC_TRNS,
-       M_WORD_Y,       M_WORD_U,       M_WORD_I,       M_WORD_O,       M_WORD_P,         KC_TRNS,
-       M_WORD_H,       M_WORD_J,       M_WORD_K,       M_WORD_L,        KC_TRNS,         KC_TRNS,
-       M_WORD_N,       M_WORD_M,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
-                        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
+           KC_6,           KC_7,           KC_8,           KC_9,           KC_0,        KC_TRNS,
+       M_WORD_Y,       M_WORD_U,       M_WORD_I,       M_WORD_O,       M_WORD_P,        KC_TRNS,
+       M_WORD_H,       M_WORD_J,       M_WORD_K,       M_WORD_L,        KC_TRNS,        KC_TRNS,
+       M_WORD_N,       M_WORD_M,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+                        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
         KC_TRNS,        KC_TRNS,
         KC_TRNS,
         KC_TRNS,        KC_TRNS,        KC_TRNS
@@ -413,15 +413,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-                                                                        KC_TRNS,         KC_TRNS,
-                                                                                         KC_TRNS,
-                                                        KC_TRNS,        KC_TRNS,         KC_TRNS,
+                                                                        KC_TRNS,        KC_TRNS,
+                                                                                        KC_TRNS,
+                                                        KC_TRNS,        KC_TRNS,        KC_TRNS,
   /* right hand */
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
-        KC_LEFT,        KC_DOWN,          KC_UP,        KC_RGHT,        KC_TRNS,         KC_TRNS,
-        KC_HOME,        KC_PGDN,        KC_PGUP,         KC_END,        KC_TRNS,         KC_TRNS,
-                        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_LEFT,        KC_DOWN,          KC_UP,        KC_RGHT,        KC_TRNS,        KC_TRNS,
+        KC_HOME,        KC_PGDN,        KC_PGUP,         KC_END,        KC_TRNS,        KC_TRNS,
+                        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
         KC_TRNS,        KC_TRNS,
         KC_TRNS,
         KC_TRNS,        KC_TRNS,        KC_TRNS
@@ -456,15 +456,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-                                                                        KC_TRNS,         KC_TRNS,
-                                                                                         KC_TRNS,
-                                                        KC_TRNS,        KC_TRNS,         KC_TRNS,
+                                                                        KC_TRNS,        KC_TRNS,
+                                                                                        KC_TRNS,
+                                                        KC_TRNS,        KC_TRNS,        KC_TRNS,
   /* right hand */
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
-        KC_TRNS,        KC_AMPR,        KC_ASTR,        KC_MINS,         KC_EQL,         KC_TRNS,
-        KC_TRNS,        KC_CIRC,        KC_PERC,         KC_DLR,        KC_TRNS,         KC_TRNS,
-        KC_TRNS,        KC_EXLM,          KC_AT,        KC_HASH,        KC_TRNS,         KC_TRNS,
-                        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,         KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_AMPR,        KC_ASTR,        KC_MINS,         KC_EQL,        KC_TRNS,
+        KC_TRNS,        KC_CIRC,        KC_PERC,         KC_DLR,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_EXLM,          KC_AT,        KC_HASH,        KC_TRNS,        KC_TRNS,
+                        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
         KC_TRNS,        KC_TRNS,
         KC_TRNS,
         KC_TRNS,        KC_TRNS,        KC_TRNS
