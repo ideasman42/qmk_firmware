@@ -221,29 +221,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |        |   Y  |   U  |   I  |   O  |   P  |  \   |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |Esc/AR|   A  |   S  |   D  |   F  |   G  |        |   H  |   J  |   K  |   L  |  ;   |  '   |
+ * | Esc  |   A  |   S  |   D  |   F  |   G  |        |   H  |   J  |   K  |   L  |  ;   |  '   |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |Shift |   Z  |   X  |   C  |   V  |   B  |        |   N  |   M  |   ,  |   .  |  /   | Delt |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
- * |      |      |Super |ScrLck|      |                      |      | PgUp | PgDn |      |      |
+ * |      |      |  (   |  [   |      |                      |      |   ]  |   )  |      |      |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
- *                                |   (  |   {  |  |  }   |  )   |
+ *                                | Gui  | SkLk |  |Insert|ARROWS|
  *                         .------+------+------|  |------+------+------.
- *                         |      |tap:  |   [  |  |  ]   |tap:  |      |
+ *                         |      |tap:  |  Alt |  | PgUp |tap:  |      |
  *                         |Space | Home |------|  |------| End  |Enter |
- *                         |      | ~L1  | Ctrl |  | Alt  | ~L2  |      |
+ *                         |      | ~L1  | Ctrl |  | PgDn | ~L2  |      |
  *                         '--------------------'  '--------------------'
  */
 [LAYER_BASE] = LAYOUT_dactyl(  // layer 0 : default
   /* left hand */
          KC_GRV,        KC_EXLM,          KC_AT,        KC_HASH,         KC_DLR,        KC_PERC,
          KC_TAB,           KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,
- MO(LAYER_DIRS),           KC_A,           KC_S,           KC_D,           KC_F,           KC_G,
+         KC_ESC,           KC_A,           KC_S,           KC_D,           KC_F,           KC_G,
         KC_LSFT,           KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,
-        KC_TRNS,        KC_TRNS,        KC_LGUI,        KC_PGUP,        KC_TRNS,
-                                                                        KC_LPRN,        KC_LCBR,
-                                                                                        KC_LBRC,
+        KC_TRNS,        KC_TRNS,        KC_LPRN,        KC_LBRC,        KC_TRNS,
+                                                                        KC_LGUI,  KC_SCROLLLOCK,
+                                                                                        KC_LALT,
                                                          KC_SPC, MO(LAYER_KPAD),       KC_LCTRL,
 
   /* right hand */
@@ -251,10 +251,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,        KC_BSLS,
            KC_H,           KC_J,           KC_K,           KC_L,        KC_SCLN,        KC_QUOT,
            KC_N,           KC_M,        KC_COMM,         KC_DOT,        KC_SLSH,        KC_DELT,
-                        KC_TRNS,        KC_PGDN,         KC_INS,        KC_TRNS,        KC_TRNS,
-        KC_RCBR,        KC_RPRN,
-        KC_RBRC,
-        KC_LALT, MO(LAYER_MDIA),         KC_ENT
+                        KC_TRNS,        KC_RBRC,        KC_RPRN,        KC_TRNS,        KC_TRNS,
+         KC_INS, MO(LAYER_DIRS),
+        KC_PGUP,
+        KC_PGDN, MO(LAYER_MDIA),         KC_ENT
     ),
 /* Keymap 1: KeyPad, Locks & Bracket Pairs
  *
@@ -267,12 +267,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |      |      |      |      |      |   _  |        |      |   1  |   2  |   3  | Enter|      |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
- * |      |      |      |      |      |                      |      |      |   .  | Enter|      |
+ * |      |      |  ()  |  []  |      |                      |      |      |   .  | Enter|      |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
- *                                |  ()  |  {}  |  |  }{  |  )(  |
+ *                                |      |      |  |      |      |
  *                         .------+------+------|  |------+------+------.
- *                         |      |      |  []  |  |  ][  |      |      |
+ *                         |      |      |      |  |      |      |      |
  *                         |      |      |------|  |------|      |  0   |
  *                         |      |      |      |  |      |      |      |
  *                         '--------------------'  '--------------------'
@@ -284,9 +284,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS, M_ARROW_RMINUS,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_UNDS,
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-                                                                 M_BRACK_IN_PRN, M_BRACK_IN_CBR,
-                                                                                 M_BRACK_IN_BRC,
+        KC_TRNS,        KC_TRNS, M_BRACK_IN_PRN, M_BRACK_IN_BRC,        KC_TRNS,
+                                                                        KC_TRNS,        KC_TRNS,
+                                                                                        KC_TRNS,
                                                         KC_TRNS,        KC_TRNS,        KC_TRNS,
   /* right hand */
         KC_TRNS,        KC_NLCK,    KC_KP_SLASH, KC_KP_ASTERISK,    KC_KP_MINUS,        KC_TRNS,
@@ -294,8 +294,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,        KC_KP_4,        KC_KP_5,        KC_KP_6,     KC_KP_PLUS,   M_QUOTE_PAIR,
         KC_TRNS,        KC_KP_1,        KC_KP_2,        KC_KP_3,    KC_KP_ENTER,        KC_TRNS,
                         KC_TRNS,        KC_TRNS,      KC_KP_DOT,    KC_KP_ENTER,        KC_TRNS,
-       M_BRACK_OUT_CBR, M_BRACK_OUT_PRN,
-       M_BRACK_OUT_BRC,
+       KC_TRNS,         KC_TRNS,
+       KC_TRNS,
        KC_TRNS,         KC_TRNS,     KC_KP_0
 ),
 /* Keymap 2: FKeys, macro, media & mouse keys
@@ -596,13 +596,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           return true;
         }
       }
+#if 0 /* Interesting but not good for gaining new muscle memory. */
       else if (keycode == MO(LAYER_DIRS)) {
         if ((layer_state & ~(1UL << LAYER_DIRS)) == 0) {
           SEND_STRING(SS_TAP(X_ESCAPE));
           return true;
         }
       }
-#if 0 /* Interesting but not good for gaining new muscle memory. */
       else if (keycode == KC_LALT) {
         SEND_STRING(SS_UP(X_LATL) SS_TAP(X_DELETE));
         WITHOUT_MOD_BITS(MOD_BIT(KC_LALT), {SEND_STRING(SS_TAP(X_DELETE));});
@@ -635,8 +635,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case M_BRACK_IN_BRC:  /* [] */
       if (record->event.pressed) {
         if (keyboard_report->mods & (MOD_BIT(KC_RSFT) | MOD_BIT(KC_LSFT))) {
-          SEND_STRING("{}");
           WITHOUT_SHIFT({
+            SEND_STRING("{}");
             SEND_STRING(SS_TAP(X_LEFT));
           });
         }
@@ -667,8 +667,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case M_BRACK_OUT_BRC:  /* ][ */
       if (record->event.pressed) {
         if (keyboard_report->mods & (MOD_BIT(KC_RSFT) | MOD_BIT(KC_LSFT))) {
-          SEND_STRING("}{");
           WITHOUT_SHIFT({
+            SEND_STRING("}{");
             SEND_STRING(SS_TAP(X_LEFT));
           });
         }
