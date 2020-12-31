@@ -44,7 +44,7 @@
 #define CFQ_USE_DYNAMIC_MACRO
 
 /* Tap layer keys for other keys. */
-#define CFQ_USE_TAP_LAYER 200
+// #define CFQ_USE_TAP_LAYER 200
 
 #define LAYER_BASE 0 /* default layer */
 #define LAYER_KPAD 1 /* keypad */
@@ -228,11 +228,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |  (   |  [   |      |                      |      |   ]  |   )  |      |      |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
- *                                | Gui  | SkLk |  |Insert|ARROWS|
+ *                                |  Gui | ScLk |  | Left | Right|
  *                         .------+------+------|  |------+------+------.
- *                         |      |tap:  |  Alt |  | PgUp |tap:  |      |
- *                         |Space | Home |------|  |------| End  |Enter |
- *                         |      | ~L1  | Ctrl |  | PgDn | ~L2  |      |
+ *                         |      |      |  Alt |  |  Up  |      |      |
+ *                         |Space |      |------|  |------|      |Enter |
+ *                         |      | ~L1  | Ctrl |  | Down | ~L2  |      |
  *                         '--------------------'  '--------------------'
  */
 [LAYER_BASE] = LAYOUT_dactyl(  // layer 0 : default
@@ -252,9 +252,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            KC_H,           KC_J,           KC_K,           KC_L,        KC_SCLN,        KC_QUOT,
            KC_N,           KC_M,        KC_COMM,         KC_DOT,        KC_SLSH,        KC_DELT,
                         KC_TRNS,        KC_RBRC,        KC_RPRN,        KC_TRNS,        KC_TRNS,
-         KC_INS, MO(LAYER_DIRS),
-        KC_PGUP,
-        KC_PGDN, MO(LAYER_MDIA),         KC_ENT
+        KC_LEFT, KC_RIGHT,
+          KC_UP,
+        KC_DOWN, MO(LAYER_MDIA),         KC_ENT
     ),
 /* Keymap 1: KeyPad, Locks & Bracket Pairs
  *
@@ -270,11 +270,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |  ()  |  []  |      |                      |      |      |   .  | Enter|      |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
- *                                |      |      |  |      |      |
+ *                                |      |      |  | Home | End  |
  *                         .------+------+------|  |------+------+------.
- *                         |      |      |      |  |      |      |      |
+ *                         |      |      |      |  | PgUp |      |      |
  *                         |      |      |------|  |------|      |  0   |
- *                         |      |      |      |  |      |      |      |
+ *                         |      |      |      |  | PgDn |      |      |
  *                         '--------------------'  '--------------------'
  */
 // SYMBOLS
@@ -294,9 +294,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,        KC_KP_4,        KC_KP_5,        KC_KP_6,     KC_KP_PLUS,   M_QUOTE_PAIR,
         KC_TRNS,        KC_KP_1,        KC_KP_2,        KC_KP_3,    KC_KP_ENTER,        KC_TRNS,
                         KC_TRNS,        KC_TRNS,      KC_KP_DOT,    KC_KP_ENTER,        KC_TRNS,
-       KC_TRNS,         KC_TRNS,
-       KC_TRNS,
-       KC_TRNS,         KC_TRNS,     KC_KP_0
+       KC_HOME,         KC_END,
+       KC_PGUP,
+       KC_PGDN,         KC_TRNS,     KC_KP_0
 ),
 /* Keymap 2: FKeys, macro, media & mouse keys
  *
