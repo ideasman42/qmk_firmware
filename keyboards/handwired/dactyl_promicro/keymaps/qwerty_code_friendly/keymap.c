@@ -269,7 +269,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                .-------------.  .-------------.
  *                                |  ()  |  []  |  |  ][  |  )(  |
  *                         .------+------+------|  |------+------+------.
- *                         |      |      |  {}  |  |  }{  |      |      |
+ *                         |      |      |Alt/{}|  |GUI/}{|      |      |
  *                         |      |      |------|  |------|      |  0   |
  *                         |      |      |      |  |      |      |      |
  *                         '--------------------'  '--------------------'
@@ -283,7 +283,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_UNDS,
         KC_TRNS,        KC_TRNS,        KC_PGUP,        KC_PGDN,        KC_TRNS,
                                                                  M_BRACK_IN_PRN, M_BRACK_IN_BRC,
-                                                                                 M_BRACK_IN_CBR,
+                                                                                        KC_LALT,
                                                         KC_TRNS,        KC_TRNS,        KC_TRNS,
   /* right hand */
         KC_TRNS,        KC_NLCK,    KC_KP_SLASH, KC_KP_ASTERISK,    KC_KP_MINUS,        KC_TRNS,
@@ -292,51 +292,51 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,        KC_KP_1,        KC_KP_2,        KC_KP_3,    KC_KP_ENTER,        KC_TRNS,
                         KC_TRNS,        KC_TRNS,      KC_KP_DOT,        KC_TRNS,        KC_TRNS,
 M_BRACK_OUT_BRC,M_BRACK_OUT_PRN,
-M_BRACK_OUT_CBR,
+        KC_RGUI,
         KC_TRNS,        KC_TRNS,        KC_KP_0
 ),
 /* Keymap 2: FKeys, macro, media & mouse keys
  *
  * .-----------------------------------------.        .-----------------------------------------.
- * |      |      |      |      |      |      |        | Mute |  F10 |  F11 |  F12 |      |App   |
+ * |      |      |      |      |MWhlUp|VolUp |        | Mute |  F10 |  F11 |  F12 |      |App   |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      |      | MsUp |      |      |        | Play |  F7  |  F8  |  F9  |      |Menu  |
+ * |      |      |      | MsUp |MWhlDn|VolDn |        | Play |  F7  |  F8  |  F9  |      |Menu  |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      |MsLeft|MsDown|MsRght|MWhlUp|        |VolUp |  F4  |  F5  |  F6  |      |Search|
+ * |      |      |MsLeft|MsDown|MsRght| MPrv |        | MRwd |  F4  |  F5  |  F6  |      |Search|
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      | Rclk | Mclk | Lclk |MWhlDn|        |VolDn |  F1  |  F2  |  F3  |      |      |
+ * |      |      | Rclk | Mclk | Lclk | MNxt |        | MFwd |  F1  |  F2  |  F3  |      |      |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
  * |      |      |      |      |      |                      |      | Home | End  |      |      |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
- *                                | Rec1 | Rec2 |  | MRwd | MFwd |
+ *                                | Rec1 | Rec2 |  | Run1 | Run2 |
  *                         .------+------+------|  |------+------+------.
- *                         |      |      | Run1 |  | MPrv |      |      |
- *                         | Stop |      |------|  |------|      | F13  |
- *                         |      |      | Run2 |  | MNxt |      |      |
+ *                         |      |      |      |  |      |      |      |
+ *                         | Stop |      |------|  |------|      |      |
+ *                         |      |      |      |  |      |      |      |
  *                         '--------------------'  '--------------------'
  *
  */
 // MEDIA AND MOUSE
 [LAYER_MDIA] = LAYOUT_dactyl(
   /* left hand */
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_MS_U,        KC_TRNS,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_MS_L,        KC_MS_D,        KC_MS_R,        KC_WH_U,
-        KC_TRNS,        KC_TRNS,        KC_BTN2,        KC_BTN3,        KC_BTN1,        KC_WH_D,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_WH_U,        KC_VOLU,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_MS_U,        KC_WH_D,        KC_VOLD,
+        KC_TRNS,        KC_TRNS,        KC_MS_L,        KC_MS_D,        KC_MS_R,        KC_MPRV,
+        KC_TRNS,        KC_TRNS,        KC_BTN2,        KC_BTN3,        KC_BTN1,        KC_MNXT,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
                                                                         DM_REC1,        DM_REC2,
-                                                                                        DM_PLY1,
-                                                        DM_RSTP,        KC_TRNS,        DM_PLY2,
+                                                                                        KC_TRNS,
+                                                        DM_RSTP,        KC_TRNS,        KC_TRNS,
   /* right hand */
         KC_MUTE,         KC_F10,         KC_F11,         KC_F12,        KC_TRNS,         KC_APP,
         KC_MPLY,          KC_F7,          KC_F8,          KC_F9,        KC_TRNS,        KC_MENU,
-        KC_VOLU,          KC_F4,          KC_F5,          KC_F6,        KC_TRNS,  KC_WWW_SEARCH,
-        KC_VOLD,          KC_F1,          KC_F2,          KC_F3,        KC_TRNS,        KC_TRNS,
+        KC_MRWD,          KC_F4,          KC_F5,          KC_F6,        KC_TRNS,  KC_WWW_SEARCH,
+        KC_MFFD,          KC_F1,          KC_F2,          KC_F3,        KC_TRNS,        ,
                         KC_TRNS,        KC_HOME,         KC_END,        KC_TRNS,        KC_TRNS,
-        KC_MRWD,        KC_MFFD,
-        KC_MPRV,
-        KC_MNXT,        KC_TRNS,         KC_F13
+        DM_PLY1,        DM_PLY2,
+        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS
 ),
 /* Keymap 3: Entire Words (one for each key) & Numbers
  *
@@ -605,11 +605,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
 #endif
       else if (keycode == KC_LALT) {
-        WITHOUT_MOD_BITS(MOD_BIT(KC_LALT), {SEND_STRING("{");});
+        SEND_STRING(SS_UP(X_LALT));
+        if (layer_state_is(LAYER_KPAD)) {
+          SEND_STRING("{}" SS_TAP(X_LEFT));
+          return false;
+        }
+        SEND_STRING("{");
         return true;
       }
       else if (keycode == KC_RGUI) {
-        WITHOUT_MOD_BITS(MOD_BIT(KC_RGUI), {SEND_STRING("}");});
+        SEND_STRING(SS_UP(X_RGUI));
+        if (layer_state_is(LAYER_KPAD)) {
+          SEND_STRING("}{" SS_TAP(X_LEFT));
+          return false;
+        }
+        SEND_STRING("}");
         return true;
       }
 
