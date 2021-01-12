@@ -44,7 +44,8 @@
 #define CFQ_USE_DYNAMIC_MACRO
 
 /* Tap layer keys for other keys. */
-#define CFQ_USE_TAP_LAYER 200
+#define CFQ_USE_TAP_LAYER 150
+// #define CFQ_USE_TAP_LAYER_PENDING
 
 #define LAYER_BASE 0 /* default layer */
 #define LAYER_KPAD 1 /* keypad */
@@ -306,7 +307,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |      |      | Rclk | Mclk | Lclk | MNxt |        |VolDn |  F1  |  F2  |  F3  |      |      |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
- * |      |      |      |      |      |                      |      | MRwd | MFwd |      |      |
+ * |      |      | MPrv | MNxt |      |                      |      | MRwd | MFwd |      |      |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
  *                                | Rec1 | Rec2 |  | Run1 | Run2 |
@@ -523,7 +524,14 @@ uint32_t layer_state_set_user(uint32_t state) {
 static struct {
   uint8_t time;
   uint16_t keycode;
+#ifdef CFQ_USE_TAP_LAYER_PENDING
+  bool pending;
+#endif
 } cfq_tap_detect;
+
+#define IS_KEYCODE_PENDING(kc) \
+  ((kc == KC_LALT) || (kc == KC_LCTL) || (kc == KC_LGUI) || (kc == KC_RGUI))
+
 #endif
 
 #define WITHOUT_MODS(...) \
@@ -562,10 +570,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 #ifdef CFQ_USE_TAP_LAYER
   {
+
+#ifdef CFQ_USE_TAP_LAYER_PENDING
+    /* If we press a key while awaiting a tap event,
+     * favor the hold action so we can use this for modifiers. */
+    if (record->event.pressed && cfq_tap_detect.pending) {
+        register_code(cfq_tap_detect.keycode);
+        cfq_tap_detect.pending = false;
+    }
+#endif
+
     bool is_tap = false;
     if (record->event.pressed) {
       cfq_tap_detect.keycode = keycode;
       cfq_tap_detect.time = 0;
+
+#ifdef CFQ_USE_TAP_LAYER_PENDING
+      if (IS_KEYCODE_PENDING(keycode)) {
+        cfq_tap_detect.pending = true;
+        return false;
+      }
+#endif
     }
     else {
       if (cfq_tap_detect.time < CFQ_USE_TAP_LAYER) {
@@ -575,6 +600,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           is_tap = true;
         }
         cfq_tap_detect.time = CFQ_USE_TAP_LAYER;
+
+#ifdef CFQ_USE_TAP_LAYER_PENDING
+        cfq_tap_detect.pending = false;
+#endif
       }
     }
 
@@ -605,40 +634,48 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
 #endif
       else if (keycode == KC_LALT) {
+#ifndef CFQ_USE_TAP_LAYER_PENDING
         SEND_STRING(SS_UP(X_LALT));
+#endif
         if (layer_state_is(LAYER_KPAD)) {
           SEND_STRING("{}" SS_TAP(X_LEFT));
           return false;
         }
         SEND_STRING("{");
-        return true;
+        return false;
       }
       else if (keycode == KC_RGUI) {
+#ifndef CFQ_USE_TAP_LAYER_PENDING
         SEND_STRING(SS_UP(X_RGUI));
+#endif
         if (layer_state_is(LAYER_KPAD)) {
           SEND_STRING("}{" SS_TAP(X_LEFT));
           return false;
         }
         SEND_STRING("}");
-        return true;
+        return false;
       }
       else if (keycode == KC_LCTL) {
+#ifndef CFQ_USE_TAP_LAYER_PENDING
         SEND_STRING(SS_UP(X_LCTL));
+#endif
         if (layer_state_is(LAYER_KPAD)) {
           SEND_STRING("()" SS_TAP(X_LEFT));
           return false;
         }
         SEND_STRING("(");
-        return true;
+        return false;
       }
       else if (keycode == KC_LGUI) {
+#ifndef CFQ_USE_TAP_LAYER_PENDING
         SEND_STRING(SS_UP(X_LGUI));
+#endif
         if (layer_state_is(LAYER_KPAD)) {
           SEND_STRING(")(" SS_TAP(X_LEFT));
           return false;
         }
         SEND_STRING(")");
-        return true;
+        return false;
       }
 
     }
@@ -769,13 +806,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SEND_STRING("''" SS_TAP(X_LEFT) SS_DOWN(X_RSHIFT) SS_DOWN(X_LSHIFT));
           });
         return false;
-      }
       break;
     case KC_RSHIFT:  /* "" */
       if (record->event.pressed && (keyboard_report->mods & (MOD_BIT(KC_LSFT)))) {
         WITHOUT_MODS({
             SEND_STRING("\x22\x22" SS_TAP(X_LEFT) SS_DOWN(X_LSHIFT) SS_DOWN(X_RSHIFT));
           });
+      }
         return false;
       }
       break;
@@ -811,6 +848,14 @@ void matrix_scan_user(void) {
 #ifdef CFQ_USE_TAP_LAYER
   if (cfq_tap_detect.time != CFQ_USE_TAP_LAYER) {
     cfq_tap_detect.time++;
+#ifdef CFQ_USE_TAP_LAYER_PENDING
+    if (cfq_tap_detect.time == CFQ_USE_TAP_LAYER) {
+      if (cfq_tap_detect.pending) {
+        cfq_tap_detect.pending = false;
+        register_code(cfq_tap_detect.keycode);
+      }
+    }
+#endif
   }
 #endif
 
