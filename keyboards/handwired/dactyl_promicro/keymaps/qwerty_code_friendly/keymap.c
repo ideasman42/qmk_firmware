@@ -44,7 +44,7 @@
 #define CFQ_USE_DYNAMIC_MACRO
 
 /* Tap layer keys for other keys. */
-#define CFQ_USE_TAP_LAYER 150
+#define CFQ_USE_TAP_LAYER 200
 // #define CFQ_USE_TAP_LAYER_PENDING
 
 #define LAYER_BASE 0 /* default layer */
@@ -206,9 +206,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *               '-------------'                                   '-------------'
  *
  *               .------+------. .-------------.   .-------------. .------+------.
- *               |Space | PgUp | |   [  | Alt/{|   |}/RGui|  ]   | | PgDn  |Enter |
+ *               |Space |   (  | |   [  | Alt/{|   |}/RGui|  ]   | |  )   |Enter |
  *               '-------------' |------+------|   |------+------| '-------------'
- *                               |L1/Hom|Ctrl/(|   |)/LGUI|L2/End|
+ *                               |L1/Hom| Ctrl |   | LGui |L2/End|
  *                               '-------------'   '-------------'
  */
 
@@ -226,21 +226,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |  Up  | Down |      |                      |      | Left |Right |      |      |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
- *                                | PgUp |   [  |  |  ]   | PgDn |
+ *                                |   (  |   [  |  |  ]   |  )   |
  *                         .------+------+------|  |------+------+------.
  *                         |      |Tap   | Alt/{|  |RGui/}|Tap   |      |
  *                         |Space | Home |------|  |------| End  |Enter |
- *                         |      | ~L1  |Ctrl/(|  |LGui/)| ~L2  |      |
+ *                         |      | ~L1  | Ctrl |  | LGui | ~L2  |      |
  *                         '--------------------'  '--------------------'
  */
 [LAYER_BASE] = LAYOUT_dactyl(  // layer 0 : default
   /* left hand */
          KC_GRV,        KC_EXLM,          KC_AT,        KC_HASH,         KC_DLR,        KC_PERC,
          KC_TAB,           KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,
-         KC_ESC,           KC_A,           KC_S,           KC_D,           KC_F,           KC_G,
+ MO(LAYER_DIRS),           KC_A,           KC_S,           KC_D,           KC_F,           KC_G,
         KC_LSFT,           KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,
         KC_TRNS,        KC_TRNS,          KC_UP,        KC_DOWN,        KC_TRNS,
-                                                                        KC_PGUP,        KC_LBRC,
+                                                                        KC_LPRN,        KC_LBRC,
                                                                                         KC_LALT,
                                                          KC_SPC, MO(LAYER_KPAD),        KC_LCTL,
 
@@ -250,64 +250,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            KC_H,           KC_J,           KC_K,           KC_L,        KC_SCLN,        KC_QUOT,
            KC_N,           KC_M,        KC_COMM,         KC_DOT,        KC_SLSH,        KC_DELT,
                         KC_TRNS,        KC_LEFT,       KC_RIGHT,        KC_TRNS,        KC_TRNS,
-        KC_RBRC,        KC_PGDN,
+        KC_RBRC,        KC_RPRN,
         KC_RGUI,
         KC_LGUI, MO(LAYER_MDIA),         KC_ENT
     ),
-/* Keymap 1: KeyPad, Locks & Bracket Pairs
- *
- * .-----------------------------------------.        .-----------------------------------------.
- * |  ``  |PrtScn|ScrlLk|CapsLk|Break |      |        |      |NumLck|   /  |   *  |   -  |      |
- * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      |      |      |      |      |        |      |   7  |   8  |   9  |   +  |      |
- * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      |      |      |      |  ->  |        |      |   4  |   5  |   6  |   +  |  ''  |
- * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      |      |      |      |   _  |        |      |   1  |   2  |   3  | Enter|      |
- * |------+------+------+------+------+------'        '------+------+------+------+------+------|
- * |      |      |      |      |      |                      |      |      |   .  |      |      |
- * '----------------------------------'                      '----------------------------------'
- *                                .-------------.  .-------------.
- *                                |      |  []  |  |  ][  |      |
- *                         .------+------+------|  |------+------+------.
- *                         |      |      |Alt/{}|  |GUI/}{|      |      |
- *                         |      |      |------|  |------|      |  0   |
- *                         |      |      |Ctl/()|  |GUI/)(|      |      |
- *                         '--------------------'  '--------------------'
- */
-// SYMBOLS
-[LAYER_KPAD] = LAYOUT_dactyl(
-  /* left hand */
-   M_BTICK_PAIR,     KC_PSCREEN,  KC_SCROLLLOCK,    KC_CAPSLOCK,       KC_PAUSE,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS, M_ARROW_RMINUS,
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_UNDS,
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-                                                                        KC_TRNS, M_BRACK_IN_BRC,
-                                                                                        KC_TRNS,
-                                                        KC_TRNS,        KC_TRNS,        KC_TRNS,
-  /* right hand */
-        KC_TRNS,        KC_NLCK,    KC_KP_SLASH, KC_KP_ASTERISK,    KC_KP_MINUS,        KC_TRNS,
-        KC_TRNS,        KC_KP_7,        KC_KP_8,        KC_KP_9,     KC_KP_PLUS,        KC_TRNS,
-        KC_TRNS,        KC_KP_4,        KC_KP_5,        KC_KP_6,     KC_KP_PLUS,   M_QUOTE_PAIR,
-        KC_TRNS,        KC_KP_1,        KC_KP_2,        KC_KP_3,    KC_KP_ENTER,        KC_TRNS,
-                        KC_TRNS,        KC_TRNS,      KC_KP_DOT,        KC_TRNS,        KC_TRNS,
-        M_BRACK_IN_BRC, KC_TRNS,
-        KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_KP_0
-),
 /* Keymap 2: FKeys, macro, media & mouse keys
  *
  * .-----------------------------------------.        .-----------------------------------------.
- * |      |      |      |      |MWhlUp|      |        | Mute |  F10 |  F11 |  F12 |      |App   |
+ * |      |      |      |      |      |      |        |      |  F10 |  F11 |  F12 |      |App   |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      |      | MsUp |MWhlDn|      |        | Play |  F7  |  F8  |  F9  |      |Menu  |
+ * |      |      |      | MsUp |      |      |        |      |  F7  |  F8  |  F9  |      |Menu  |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      |MsLeft|MsDown|MsRght| MPrv |        |VolUp |  F4  |  F5  |  F6  |      |Search|
+ * |      |      |MsLeft|MsDown|MsRght|MWhlUp|        | PgUp |  F4  |  F5  |  F6  |      |Search|
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      | Rclk | Mclk | Lclk | MNxt |        |VolDn |  F1  |  F2  |  F3  |      |      |
+ * |      |      | Rclk | Mclk | Lclk |MWhlDn|        | PgDn |  F1  |  F2  |  F3  |      |      |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
- * |      |      | MPrv | MNxt |      |                      |      | MRwd | MFwd |      |      |
+ * |      |      |      |      |      |                      |      |      |      |      |      |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
  *                                | Rec1 | Rec2 |  | Run1 | Run2 |
@@ -321,23 +279,65 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // MEDIA AND MOUSE
 [LAYER_MDIA] = LAYOUT_dactyl(
   /* left hand */
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_WH_U,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_MS_U,        KC_WH_D,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_MS_L,        KC_MS_D,        KC_MS_R,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_BTN2,        KC_BTN3,        KC_BTN1,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_MS_U,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_MS_L,        KC_MS_D,        KC_MS_R,        KC_WH_U,
+        KC_TRNS,        KC_TRNS,        KC_BTN2,        KC_BTN3,        KC_BTN1,        KC_WH_D,
         KC_TRNS,        KC_TRNS,        KC_MPRV,        KC_MNXT,        KC_TRNS,
                                                                         DM_REC1,        DM_REC2,
                                                                                         KC_TRNS,
                                                         DM_RSTP,        KC_TRNS,        KC_TRNS,
   /* right hand */
-        KC_MUTE,         KC_F10,         KC_F11,         KC_F12,        KC_TRNS,         KC_APP,
-        KC_MPLY,          KC_F7,          KC_F8,          KC_F9,        KC_TRNS,        KC_MENU,
-        KC_VOLU,          KC_F4,          KC_F5,          KC_F6,        KC_TRNS,  KC_WWW_SEARCH,
-        KC_VOLD,          KC_F1,          KC_F2,          KC_F3,        KC_TRNS,        ,
-                        KC_TRNS,        KC_MRWD,        KC_MFFD,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,         KC_F10,         KC_F11,         KC_F12,        KC_TRNS,         KC_APP,
+        KC_TRNS,          KC_F7,          KC_F8,          KC_F9,        KC_TRNS,        KC_MENU,
+        KC_PGUP,          KC_F4,          KC_F5,          KC_F6,        KC_TRNS,  KC_WWW_SEARCH,
+        KC_PGDN,          KC_F1,          KC_F2,          KC_F3,        KC_TRNS,        KC_TRNS,
+                        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
         DM_PLY1,        DM_PLY2,
         KC_TRNS,
         KC_TRNS,        KC_TRNS,        KC_TRNS
+),
+/* Keymap 1: KeyPad, Locks & Bracket Pairs
+ *
+ * .-----------------------------------------.        .-----------------------------------------.
+ * |  ``  |PrtScn|ScrlLk|CapsLk|Break | MPrv |        |      |NumLck|   /  |   *  |   -  |      |
+ * |------+------+------+------+------+------|        |------+------+------+------+------+------|
+ * |      |      |      |      |      | MNxt |        |      |   7  |   8  |   9  |   +  |      |
+ * |------+------+------+------+------+------|        |------+------+------+------+------+------|
+ * | Play |      |  -   |  _   |  ->  |VolUp |        |      |   4  |   5  |   6  |   +  |  ''  |
+ * |------+------+------+------+------+------|        |------+------+------+------+------+------|
+ * |      |      |      |      |      |VolDn |        |      |   1  |   2  |   3  | Enter|      |
+ * |------+------+------+------+------+------'        '------+------+------+------+------+------|
+ * |      |      | MRwd | MFwd |      |                      |      |      |   .  |      |      |
+ * '----------------------------------'                      '----------------------------------'
+ *                                .-------------.  .-------------.
+ *                                |  ()  |  []  |  |  ][  |  )(  |
+ *                         .------+------+------|  |------+------+------.
+ *                         |      |      |Alt/{}|  |GUI/}{|      |      |
+ *                         |      |      |------|  |------|      |  0   |
+ *                         |      |      |Ctrl/U|  |LGUI/D|      |      |
+ *                         '--------------------'  '--------------------'
+ */
+// SYMBOLS
+[LAYER_KPAD] = LAYOUT_dactyl(
+  /* left hand */
+   M_BTICK_PAIR,     KC_PSCREEN,  KC_SCROLLLOCK,    KC_CAPSLOCK,       KC_PAUSE,        KC_MPRV,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_MNXT,
+        KC_MPLY,        KC_TRNS,        KC_MINS,        KC_UNDS, M_ARROW_RMINUS,        KC_VOLU,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_VOLD,
+        KC_TRNS,        KC_TRNS,        KC_MRWD,        KC_MFFD,        KC_TRNS,
+                                                                 M_BRACK_IN_PRN, M_BRACK_IN_BRC,
+                                                                                        KC_TRNS,
+                                                        KC_TRNS,        KC_TRNS,        KC_TRNS,
+  /* right hand */
+        KC_TRNS,        KC_NLCK,    KC_KP_SLASH, KC_KP_ASTERISK,    KC_KP_MINUS,        KC_TRNS,
+        KC_TRNS,        KC_KP_7,        KC_KP_8,        KC_KP_9,     KC_KP_PLUS,        KC_TRNS,
+        KC_TRNS,        KC_KP_4,        KC_KP_5,        KC_KP_6,     KC_KP_PLUS,   M_QUOTE_PAIR,
+        KC_TRNS,        KC_KP_1,        KC_KP_2,        KC_KP_3,    KC_KP_ENTER,        KC_TRNS,
+                        KC_TRNS,        KC_TRNS,      KC_KP_DOT,        KC_TRNS,        KC_TRNS,
+M_BRACK_OUT_BRC,M_BRACK_OUT_PRN,
+        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_KP_0
 ),
 /* Keymap 3: Entire Words (one for each key) & Numbers
  *
@@ -655,26 +655,29 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING("}");
         return false;
       }
+#if 0 /* Nifty but disabled for now, since it's possible to tap by accident. */
       else if (keycode == KC_LCTL) {
 #ifndef CFQ_USE_TAP_LAYER_PENDING
         SEND_STRING(SS_UP(X_LCTL));
 #endif
-        if (layer_state_is(LAYER_KPAD)) {
-          SEND_STRING("()" SS_TAP(X_LEFT));
-          return false;
-        }
-        SEND_STRING("(");
+        // if (layer_state_is(LAYER_KPAD)) {
+        //   SEND_STRING("()" SS_TAP(X_LEFT));
+        //   return false;
+        // }
+        SEND_STRING("_");
         return false;
       }
+#endif /* `if 0` */
       else if (keycode == KC_LGUI) {
 #ifndef CFQ_USE_TAP_LAYER_PENDING
         SEND_STRING(SS_UP(X_LGUI));
 #endif
-        if (layer_state_is(LAYER_KPAD)) {
-          SEND_STRING(")(" SS_TAP(X_LEFT));
-          return false;
-        }
-        SEND_STRING(")");
+        // if (layer_state_is(LAYER_KPAD)) {
+        //   SEND_STRING(")(" SS_TAP(X_LEFT));
+        //   return false;
+        // }
+        // SEND_STRING("-");
+        SEND_STRING(SS_TAP(X_ESCAPE));
         return false;
       }
 
