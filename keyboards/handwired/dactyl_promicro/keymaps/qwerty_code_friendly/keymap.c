@@ -237,7 +237,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* left hand */
          KC_GRV,        KC_EXLM,          KC_AT,        KC_HASH,         KC_DLR,        KC_PERC,
          KC_TAB,           KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,
- MO(LAYER_DIRS),           KC_A,           KC_S,           KC_D,           KC_F,           KC_G,
+         KC_ESC,           KC_A,           KC_S,           KC_D,           KC_F,           KC_G,
         KC_LSFT,           KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,
         KC_TRNS,        KC_TRNS,          KC_UP,        KC_DOWN,        KC_TRNS,
                                                                         KC_LPRN,        KC_LBRC,
@@ -667,7 +667,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING("_");
         return false;
       }
-#endif /* `if 0` */
       else if (keycode == KC_LGUI) {
 #ifndef CFQ_USE_TAP_LAYER_PENDING
         SEND_STRING(SS_UP(X_LGUI));
@@ -676,10 +675,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         //   SEND_STRING(")(" SS_TAP(X_LEFT));
         //   return false;
         // }
-        // SEND_STRING("-");
-        SEND_STRING(SS_TAP(X_ESCAPE));
+        SEND_STRING("-");
         return false;
       }
+#endif /* `if 0` */
 
     }
   }
