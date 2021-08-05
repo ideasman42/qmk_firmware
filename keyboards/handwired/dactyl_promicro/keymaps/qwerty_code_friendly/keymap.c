@@ -74,6 +74,9 @@ enum custom_keycodes {
   M_QUOTE_PAIR,
   M_BTICK_PAIR,
 
+  M_SPEECH2TXT_A,
+  M_SPEECH2TXT_B,
+
   /* allow user defined words for each character:
    * use CFQ_WORD_[A-Z] defines. */
   M_WORD_A, M_WORD_B, M_WORD_C, M_WORD_D, M_WORD_E, M_WORD_F,
@@ -304,9 +307,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |      |      |      |      |      | MNxt |        |      |   7  |   8  |   9  |   +  |      |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * | Play |      |  -   |  _   |  ->  |VolUp |        |      |   4  |   5  |   6  |   +  |  ''  |
+ * |SPTT_A|      |  -   |  _   |  ->  |VolUp |        |      |   4  |   5  |   6  |   +  |  ''  |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      |      |      |      |VolDn |        |      |   1  |   2  |   3  | Enter|      |
+ * |SPTT_B|      |      |      | Play |VolDn |        |      |   1  |   2  |   3  | Enter|      |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
  * |      |      | MRwd | MFwd |      |                      |      |      |   .  |      |      |
  * '----------------------------------'                      '----------------------------------'
@@ -323,8 +326,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* left hand */
    M_BTICK_PAIR,     KC_PSCREEN,  KC_SCROLLLOCK,    KC_CAPSLOCK,       KC_PAUSE,        KC_MPRV,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_MNXT,
-        KC_MPLY,        KC_TRNS,        KC_MINS,        KC_UNDS, M_ARROW_RMINUS,        KC_VOLU,
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_VOLD,
+ M_SPEECH2TXT_A,        KC_TRNS,        KC_MINS,        KC_UNDS, M_ARROW_RMINUS,        KC_VOLU,
+ M_SPEECH2TXT_B,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_MPLY,        KC_VOLD,
         KC_TRNS,        KC_TRNS,        KC_MRWD,        KC_MFFD,        KC_TRNS,
                                                                  M_BRACK_IN_PRN, M_BRACK_IN_BRC,
                                                                                         KC_TRNS,
@@ -685,6 +688,32 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif
 
   switch (keycode) {
+
+    case M_SPEECH2TXT_A:
+      if (record->event.pressed) {
+        WITHOUT_MODS({
+            SEND_STRING(SS_TAP(X_F15));
+          });
+      }
+      else {
+        WITHOUT_MODS({
+            SEND_STRING(SS_TAP(X_F16));
+          });
+      }
+      return false;
+    case M_SPEECH2TXT_B:
+      if (record->event.pressed) {
+        WITHOUT_MODS({
+            SEND_STRING(SS_TAP(X_F17));
+          });
+      }
+      else {
+        WITHOUT_MODS({
+            SEND_STRING(SS_TAP(X_F18));
+          });
+      }
+      return false;
+
     /* dynamically generate these. */
     case M_BRACK_IN_CBR:  /* {} */
       if (record->event.pressed) {
