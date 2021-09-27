@@ -205,13 +205,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|       |------+------+------+------+------+------|
  * |Shift |   Z  |   X  |   C  |   V  |   B  |       |   N  |   M  |   ,  |   .  |  /   | Delt |
  * '------+------+------+------+------+------'       '------+------+------+------+------+------'
- *               |  Up  | Down |                                   | Left |Right |
+ *               |   ?? |   ?? |                                   |   ?  |   ?  |
  *               '-------------'                                   '-------------'
  *
  *               .------+------. .-------------.   .-------------. .------+------.
- *               |Space |   (  | |   [  | Alt/{|   |}/RGui|  ]   | |  )   |Enter |
+ *               |Space |   (  | |   [  | Alt/{|   |}/LGui|  ]   | |  )   |Enter |
  *               '-------------' |------+------|   |------+------| '-------------'
- *                               |L1/Hom| Ctrl |   | LGui |L2/End|
+ *                               |L1/Hom| Ctrl |   |Arrows|L2/End|
  *                               '-------------'   '-------------'
  */
 
@@ -222,18 +222,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |        |   Y  |   U  |   I  |   O  |   P  |  \   |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * | Esc  |   A  |   S  |   D  |   F  |   G  |        |   H  |   J  |   K  |   L  |  ;   |  '   |
+ * |Arrows|   A  |   S  |   D  |   F  |   G  |        |   H  |   J  |   K  |   L  |  ;   |  '   |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |Shift |   Z  |   X  |   C  |   V  |   B  |        |   N  |   M  |   ,  |   .  |  /   | Delt |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
- * |      |      |  Up  | Down |      |                      |      | Left |Right |      |      |
+ * |      |      |  ??  |   ?? |      |                      |      |  ??  |   ?? |      |      |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
  *                                |   (  |   [  |  |  ]   |  )   |
  *                         .------+------+------|  |------+------+------.
- *                         |      |Tap   | Alt/{|  |RGui/}|Tap   |      |
+ *                         |      |Tap   | Alt/{|  |LGui/}|Tap   |      |
  *                         |Space | Home |------|  |------| End  |Enter |
- *                         |      | ~L1  | Ctrl |  | LGui | ~L2  |      |
+ *                         |      | ~L1  | Ctrl |  |Arrows| ~L2  |      |
  *                         '--------------------'  '--------------------'
  */
 [LAYER_BASE] = LAYOUT_dactyl(  // layer 0 : default
@@ -242,7 +242,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          KC_TAB,           KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,
          KC_ESC,           KC_A,           KC_S,           KC_D,           KC_F,           KC_G,
         KC_LSFT,           KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,
-        KC_TRNS,        KC_TRNS,          KC_UP,        KC_DOWN,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
                                                                         KC_LPRN,        KC_LBRC,
                                                                                         KC_LALT,
                                                          KC_SPC, MO(LAYER_KPAD),        KC_LCTL,
@@ -252,10 +252,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,        KC_BSLS,
            KC_H,           KC_J,           KC_K,           KC_L,        KC_SCLN,        KC_QUOT,
            KC_N,           KC_M,        KC_COMM,         KC_DOT,        KC_SLSH,        KC_DELT,
-                        KC_TRNS,        KC_LEFT,       KC_RIGHT,        KC_TRNS,        KC_TRNS,
+                        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
         KC_RBRC,        KC_RPRN,
-        KC_RGUI,
-        KC_LGUI, MO(LAYER_MDIA),         KC_ENT
+        KC_LGUI,
+  MO(LAYER_DIRS), MO(LAYER_MDIA),         KC_ENT
     ),
 /* Keymap 2: FKeys, macro, media & mouse keys
  *
@@ -647,9 +647,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING("{");
         return false;
       }
-      else if (keycode == KC_RGUI) {
+      else if (keycode == KC_LGUI) {
 #ifndef CFQ_USE_TAP_LAYER_PENDING
-        SEND_STRING(SS_UP(X_RGUI));
+        SEND_STRING(SS_UP(X_LGUI));
 #endif
         if (layer_state_is(LAYER_KPAD)) {
           SEND_STRING("}{" SS_TAP(X_LEFT));
@@ -670,9 +670,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING("_");
         return false;
       }
-      else if (keycode == KC_LGUI) {
+      else if (keycode == KC_RGUI) {
 #ifndef CFQ_USE_TAP_LAYER_PENDING
-        SEND_STRING(SS_UP(X_LGUI));
+        SEND_STRING(SS_UP(X_RGUI));
 #endif
         // if (layer_state_is(LAYER_KPAD)) {
         //   SEND_STRING(")(" SS_TAP(X_LEFT));
