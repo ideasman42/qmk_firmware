@@ -49,9 +49,11 @@
 
 #define LAYER_BASE 0 /* default layer */
 #define LAYER_KPAD 1 /* keypad */
-#define LAYER_MDIA 2 /* media keys */
+#define LAYER_DIRS 2 /* directional keys */
 #define LAYER_WORD 3 /* F-Keys & Words */
-#define LAYER_DIRS 4 /* Arrow keys */
+#define LAYER_FKEY 4 /* Function keys. */
+
+/* Not used at the moment. */
 #define LAYER_SYMB 5 /* Symbols */
 #define LAYER_BLNK 6 /* Blank. */
 
@@ -76,6 +78,12 @@ enum custom_keycodes {
 
   M_SPEECH2TXT_A,
   M_SPEECH2TXT_B,
+
+  /* Hyper + Arrow keys. */
+  M_HYP_L,
+  M_HYP_R,
+  M_HYP_U,
+  M_MYP_D,
 
   /* allow user defined words for each character:
    * use CFQ_WORD_[A-Z] defines. */
@@ -205,13 +213,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|       |------+------+------+------+------+------|
  * |Shift |   Z  |   X  |   C  |   V  |   B  |       |   N  |   M  |   ,  |   .  |  /   | Delt |
  * '------+------+------+------+------+------'       '------+------+------+------+------+------'
- *               |   ?? |   ?? |                                   |   ?  |   ?  |
+ *               |SPTT_A|SPTT_B|                                   |   ?  |   ?  |
  *               '-------------'                                   '-------------'
  *
  *               .------+------. .-------------.   .-------------. .------+------.
- *               |Space |   (  | |   [  | Alt/{|   |}/LGui|  ]   | |  )   |Enter |
+ *               |Space |   (  | |   [  | Alt/{|   |}/~L4 |  ]   | |  )   |Enter |
  *               '-------------' |------+------|   |------+------| '-------------'
- *                               |L1/Hom| Ctrl |   |Arrows|L2/End|
+ *                               |L1/Hom| Ctrl |   | LGui |L2/End|
  *                               '-------------'   '-------------'
  */
 
@@ -222,18 +230,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |        |   Y  |   U  |   I  |   O  |   P  |  \   |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |Arrows|   A  |   S  |   D  |   F  |   G  |        |   H  |   J  |   K  |   L  |  ;   |  '   |
+ * | Esc  |   A  |   S  |   D  |   F  |   G  |        |   H  |   J  |   K  |   L  |  ;   |  '   |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |Shift |   Z  |   X  |   C  |   V  |   B  |        |   N  |   M  |   ,  |   .  |  /   | Delt |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
- * |      |      |  ??  |   ?? |      |                      |      |  ??  |   ?? |      |      |
+ * |      |      |SPTT_A|SPTT_B|      |                      |      |  ??  |   ?? |      |      |
  * '----------------------------------'                      '----------------------------------'
  *                                .-------------.  .-------------.
  *                                |   (  |   [  |  |  ]   |  )   |
  *                         .------+------+------|  |------+------+------.
- *                         |      |Tap   | Alt/{|  |LGui/}|Tap   |      |
+ *                         |      |Tap   | Alt/{|  |}/~L4 |Tap   |      |
  *                         |Space | Home |------|  |------| End  |Enter |
- *                         |      | ~L1  | Ctrl |  |Arrows| ~L2  |      |
+ *                         |      | ~L1  | Ctrl |  | LGui | ~L2  |      |
  *                         '--------------------'  '--------------------'
  */
 [LAYER_BASE] = LAYOUT_dactyl(  // layer 0 : default
@@ -242,7 +250,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          KC_TAB,           KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,
          KC_ESC,           KC_A,           KC_S,           KC_D,           KC_F,           KC_G,
         KC_LSFT,           KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS, M_SPEECH2TXT_A, M_SPEECH2TXT_B,        KC_TRNS,
                                                                         KC_LPRN,        KC_LBRC,
                                                                                         KC_LALT,
                                                          KC_SPC, MO(LAYER_KPAD),        KC_LCTL,
@@ -254,19 +262,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            KC_N,           KC_M,        KC_COMM,         KC_DOT,        KC_SLSH,        KC_DELT,
                         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
         KC_RBRC,        KC_RPRN,
-        KC_LGUI,
-  MO(LAYER_DIRS), MO(LAYER_MDIA),         KC_ENT
+ MO(LAYER_FKEY),
+        KC_LGUI, MO(LAYER_DIRS),         KC_ENT
     ),
 /* Keymap 2: FKeys, macro, media & mouse keys
  *
  * .-----------------------------------------.        .-----------------------------------------.
- * |      |      |      |      |      |      |        |      |  F10 |  F11 |  F12 |      |App   |
+ * |      |      |      |      |      |      |        |      |MWhlDn|MWhlUp|      |      |App   |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      |      | MsUp |      |      |        |      |  F7  |  F8  |  F9  |      |Menu  |
+ * |      |      |      | MsUp |      |      |        | Home | PgDn | PgUp | End  |      |Menu  |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      |MsLeft|MsDown|MsRght|MWhlUp|        | PgUp |  F4  |  F5  |  F6  |      |Search|
+ * |      |      |MsLeft|MsDown|MsRght|      |        | Left | Down | Up   |Right |      |Search|
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      | Rclk | Mclk | Lclk |MWhlDn|        | PgDn |  F1  |  F2  |  F3  |      |      |
+ * |      |      | Rclk | Mclk | Lclk |      |        | Home | PgDn | PgUp | End  |      |      |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
  * |      |      |      |      |      |                      |      |      |      |      |      |
  * '----------------------------------'                      '----------------------------------'
@@ -280,26 +288,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *
  */
 // MEDIA AND MOUSE
-[LAYER_MDIA] = LAYOUT_dactyl(
+[LAYER_DIRS] = LAYOUT_dactyl(
   /* left hand */
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_MS_U,        KC_TRNS,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_MS_L,        KC_MS_D,        KC_MS_R,        KC_WH_U,
-        KC_TRNS,        KC_TRNS,        KC_BTN2,        KC_BTN3,        KC_BTN1,        KC_WH_D,
+        KC_TRNS,        KC_TRNS,        KC_MS_L,        KC_MS_D,        KC_MS_R,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_BTN2,        KC_BTN3,        KC_BTN1,        KC_TRNS,
         KC_TRNS,        KC_TRNS,        KC_MPRV,        KC_MNXT,        KC_TRNS,
                                                                         DM_REC1,        DM_REC2,
                                                                                         KC_TRNS,
                                                         DM_RSTP,        KC_TRNS,        KC_TRNS,
   /* right hand */
-        KC_TRNS,         KC_F10,         KC_F11,         KC_F12,        KC_TRNS,         KC_APP,
-        KC_TRNS,          KC_F7,          KC_F8,          KC_F9,        KC_TRNS,        KC_MENU,
-        KC_PGUP,          KC_F4,          KC_F5,          KC_F6,        KC_TRNS,  KC_WWW_SEARCH,
-        KC_PGDN,          KC_F1,          KC_F2,          KC_F3,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_WH_D,        KC_WH_U,        KC_TRNS,        KC_TRNS,         KC_APP,
+        KC_HOME,        KC_PGDN,        KC_PGUP,         KC_END,        KC_TRNS,        KC_MENU,
+        KC_LEFT,        KC_DOWN,          KC_UP,        KC_RGHT,        KC_TRNS,  KC_WWW_SEARCH,
+        M_HYP_L,        M_MYP_D,        M_HYP_U,        M_HYP_R,        KC_TRNS,        KC_TRNS,
                         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
         DM_PLY1,        DM_PLY2,
         KC_TRNS,
         KC_TRNS,        KC_TRNS,        KC_TRNS
 ),
+
 /* Keymap 1: KeyPad, Locks & Bracket Pairs
  *
  * .-----------------------------------------.        .-----------------------------------------.
@@ -385,16 +394,16 @@ M_BRACK_OUT_BRC,M_BRACK_OUT_PRN,
         KC_TRNS,        KC_TRNS,        KC_TRNS
 ),
 
-/* Keymap 4: Arrows
+/* Keymap 4: F-Keys
  *
  * .-----------------------------------------.        .-----------------------------------------.
- * |      |      |      |      |      |      |        |      |      |      |      |      |      |
+ * |      |      |      |      |      |      |        |      |  F10 |  F11 |  F12 |      |      |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      |      |      |      |      |        |      |      |      |      |      |      |
+ * |      |      |      |      |      |      |        |      |  F7  |  F8  |  F9  |      |      |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      |      |      |      |      |        | Left | Down | Up   |Right |      |      |
+ * |      |      |      |      |      |      |        |      |  F4  |  F5  |  F6  |      |      |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      |      |      |      |      |        | Home | PgDn | PgUp | End  |      |      |
+ * |      |      |      |      |      |      |        |      |  F1  |  F2  |  F3  |      |      |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
  * |      |      |      |      |      |                      |      |      |      |      |      |
  * '----------------------------------'                      '----------------------------------'
@@ -407,7 +416,7 @@ M_BRACK_OUT_BRC,M_BRACK_OUT_PRN,
  *                         '--------------------'  '--------------------'
  */
 // MEDIA AND MOUSE
-[LAYER_DIRS] = LAYOUT_dactyl(
+[LAYER_FKEY] = LAYOUT_dactyl(
   /* left hand */
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
@@ -418,10 +427,10 @@ M_BRACK_OUT_BRC,M_BRACK_OUT_PRN,
                                                                                         KC_TRNS,
                                                         KC_TRNS,        KC_TRNS,        KC_TRNS,
   /* right hand */
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-        KC_LEFT,        KC_DOWN,          KC_UP,        KC_RGHT,        KC_TRNS,        KC_TRNS,
-        KC_HOME,        KC_PGDN,        KC_PGUP,         KC_END,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_F10,         KC_F11,         KC_F12,         KC_TRNS,        KC_TRNS,
+        KC_TRNS,         KC_F7,          KC_F8,          KC_F9,         KC_TRNS,        KC_TRNS,
+        KC_TRNS,         KC_F4,          KC_F5,          KC_F6,         KC_TRNS,        KC_TRNS,
+        KC_TRNS,         KC_F1,          KC_F2,          KC_F3,         KC_TRNS,        KC_TRNS,
                         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
         KC_TRNS,        KC_TRNS,
         KC_TRNS,
@@ -519,7 +528,7 @@ M_BRACK_OUT_BRC,M_BRACK_OUT_PRN,
 
 uint32_t layer_state_set_user(uint32_t state) {
   /* Use layer 3 when 1 & 2 are pressed. */
-  state = update_tri_layer_state(state, LAYER_KPAD, LAYER_MDIA, LAYER_WORD);
+  state = update_tri_layer_state(state, LAYER_KPAD, LAYER_DIRS, LAYER_WORD);
   return state;
 }
 
@@ -617,15 +626,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           return true;
         }
       }
-      else if (keycode == MO(LAYER_MDIA)) {
-        if ((layer_state & ~(1UL << LAYER_MDIA)) == 0) {
+      else if (keycode == MO(LAYER_FKEY)) {
+        if (layer_state_is(LAYER_KPAD)) {
+          SEND_STRING("}{" SS_TAP(X_LEFT));
+          return true;
+        }
+        SEND_STRING("}");
+        return true;
+      }
+      else if (keycode == MO(LAYER_DIRS)) {
+        if ((layer_state & ~(1UL << LAYER_DIRS)) == 0) {
           SEND_STRING(SS_TAP(X_END));
           return true;
         }
       }
 #if 0 /* Interesting but not good for gaining new muscle memory. */
-      else if (keycode == MO(LAYER_DIRS)) {
-        if ((layer_state & ~(1UL << LAYER_DIRS)) == 0) {
+      else if (keycode == MO(LAYER_FKEY)) {
+        if ((layer_state & ~(1UL << LAYER_FKEY)) == 0) {
           SEND_STRING(SS_TAP(X_ESCAPE));
           return true;
         }
@@ -647,6 +664,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING("{");
         return false;
       }
+#if 0
       else if (keycode == KC_LGUI) {
 #ifndef CFQ_USE_TAP_LAYER_PENDING
         SEND_STRING(SS_UP(X_LGUI));
@@ -658,6 +676,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING("}");
         return false;
       }
+#endif
 #if 0 /* Nifty but disabled for now, since it's possible to tap by accident. */
       else if (keycode == KC_LCTL) {
 #ifndef CFQ_USE_TAP_LAYER_PENDING
@@ -688,6 +707,43 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif
 
   switch (keycode) {
+
+    case M_HYP_L: {
+      if (record->event.pressed) {
+        SEND_STRING(SS_DOWN(X_RGUI) SS_DOWN(X_LEFT));
+      }
+      else {
+        SEND_STRING(SS_UP(X_LEFT) SS_UP(X_RGUI));
+      }
+      return false;
+    }
+    case M_HYP_R: {
+      if (record->event.pressed) {
+        SEND_STRING(SS_DOWN(X_RGUI) SS_DOWN(X_RIGHT));
+      }
+      else {
+        SEND_STRING(SS_UP(X_RIGHT) SS_UP(X_RGUI));
+      }
+      return false;
+    }
+    case M_HYP_U: {
+      if (record->event.pressed) {
+        SEND_STRING(SS_DOWN(X_RGUI) SS_DOWN(X_UP));
+      }
+      else {
+        SEND_STRING(SS_UP(X_UP) SS_UP(X_RGUI));
+      }
+      return false;
+    }
+    case M_MYP_D: {
+      if (record->event.pressed) {
+        SEND_STRING(SS_DOWN(X_RGUI) SS_DOWN(X_DOWN));
+      }
+      else {
+        SEND_STRING(SS_UP(X_DOWN) SS_UP(X_RGUI));
+      }
+      return false;
+    }
 
     case M_SPEECH2TXT_A:
       if (record->event.pressed) {
