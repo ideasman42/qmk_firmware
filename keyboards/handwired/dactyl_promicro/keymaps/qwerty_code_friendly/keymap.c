@@ -41,6 +41,9 @@
      {k56, k57, k58, k59, k5A, KC_NO }, \
    }
 
+
+#define CFQ_USE_COLEMAK_MOD_DH
+
 #define CFQ_USE_DYNAMIC_MACRO
 
 /* Tap layer keys for other keys. */
@@ -56,6 +59,10 @@
 /* Not used at the moment. */
 #define LAYER_SYMB 5 /* Symbols */
 #define LAYER_BLNK 6 /* Blank. */
+
+#ifdef CFQ_USE_COLEMAK_MOD_DH
+#define LAYER_BASE_COLMAK_DH 8 /* default layer */
+#endif
 
 enum custom_keycodes {
   /* Ensure these codes start after the highest keycode defined in Quantum. */
@@ -78,6 +85,10 @@ enum custom_keycodes {
 
   M_SPEECH2TXT_A,
   M_SPEECH2TXT_B,
+
+#ifdef CFQ_USE_COLEMAK_MOD_DH
+  M_COLMAK_SWAP,
+#endif
 
   /* Hyper + Arrow keys. */
   M_HYP_L,
@@ -265,6 +276,52 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  MO(LAYER_FKEY),
         KC_LGUI, MO(LAYER_DIRS),         KC_ENT
     ),
+
+#ifdef CFQ_USE_COLEMAK_MOD_DH
+/* Keymap 8: Colmak-DH
+ *
+ * .-----------------------------------------.        .-----------------------------------------.
+ * |      |      |      |      |      |      |        |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|        |------+------+------+------+------+------|
+ * |      |   Q  |   W  |   F  |   P  |   B  |        |   J  |   L  |   U  |   Y  |  ;   |      |
+ * |------+------+------+------+------+------|        |------+------+------+------+------+------|
+ * |      |   A  |   R  |   S  |   T  |   G  |        |   M  |   N  |   E  |   I  |  O   |      |
+ * |------+------+------+------+------+------|        |------+------+------+------+------+------|
+ * |      |   Z  |   X  |   C  |   D  |   V  |        |   K  |   H  |   ,  |   .  |  /   |      |
+ * |------+------+------+------+------+------'        '------+------+------+------+------+------|
+ * |      |      |      |      |      |                      |      |      |      |      |      |
+ * '----------------------------------'                      '----------------------------------'
+ *                                .-------------.  .-------------.
+ *                                |      |      |  |      |      |
+ *                         .------+------+------|  |------+------+------.
+ *                         |      |      |      |  |      |      |      |
+ *                         |      |      |------|  |------|      |      |
+ *                         |      |      |      |  |      |      |      |
+ *                         '--------------------'  '--------------------'
+ */
+[LAYER_BASE_COLMAK_DH] = LAYOUT_dactyl(  // layer 8 : COLMAK-DH
+  /* left hand */
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,           KC_Q,           KC_W,           KC_F,           KC_P,           KC_B,
+        KC_TRNS,           KC_A,           KC_R,           KC_S,           KC_T,           KC_G,
+        KC_TRNS,           KC_Z,           KC_X,           KC_C,           KC_D,           KC_V,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+                                                                        KC_TRNS,        KC_TRNS,
+                                                                                        KC_TRNS,
+                                                        KC_TRNS,        KC_TRNS,        KC_TRNS,
+
+  /* right hand */
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+           KC_J,           KC_L,           KC_U,           KC_Y,        KC_SCLN,        KC_TRNS,
+           KC_M,           KC_N,           KC_E,           KC_I,           KC_O,        KC_TRNS,
+           KC_K,           KC_H,        KC_COMM,         KC_DOT,        KC_SLSH,        KC_TRNS,
+                        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,
+        KC_TRNS,
+        KC_TRNS,        KC_TRNS,         KC_TRNS
+    ),
+#endif /* CFQ_USE_COLEMAK_MOD_DH */
+
 /* Keymap 2: FKeys, macro, media & mouse keys
  *
  * .-----------------------------------------.        .-----------------------------------------.
@@ -316,7 +373,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |      |      |      |      |      | MNxt |        |      |   7  |   8  |   9  |   +  |      |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
- * |      |      |  -   |  _   |  ->  |VolUp |        |      |   4  |   5  |   6  |   +  |  ''  |
+ * |COLMAK|      |  -   |  _   |  ->  |VolUp |        |      |   4  |   5  |   6  |   +  |  ''  |
  * |------+------+------+------+------+------|        |------+------+------+------+------+------|
  * |      |      |      |      | Play |VolDn |        |      |   1  |   2  |   3  | Enter|      |
  * |------+------+------+------+------+------'        '------+------+------+------+------+------|
@@ -335,7 +392,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* left hand */
    M_BTICK_PAIR,     KC_PSCREEN,  KC_SCROLLLOCK,    KC_CAPSLOCK,       KC_PAUSE,        KC_MPRV,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_MNXT,
-        KC_TRNS,        KC_TRNS,        KC_MINS,        KC_UNDS, M_ARROW_RMINUS,        KC_VOLU,
+  M_COLMAK_SWAP,        KC_TRNS,        KC_MINS,        KC_UNDS, M_ARROW_RMINUS,        KC_VOLU,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_MPLY,        KC_VOLD,
         KC_TRNS,        KC_TRNS,        KC_MRWD,        KC_MFFD,        KC_TRNS,
                                                                  M_BRACK_IN_PRN, M_BRACK_IN_BRC,
@@ -572,6 +629,15 @@ static struct {
     set_mods(_real_mods); \
   } while (0)
 
+
+void persistent_default_layer_set(uint16_t default_layer) {
+  eeconfig_update_default_layer(default_layer);
+  default_layer_set(default_layer);
+#ifdef RGBSPS_ENABLE
+  led_set_default_layer_indicator();
+#endif
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 #ifdef CFQ_USE_DYNAMIC_MACRO
@@ -770,6 +836,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
 
+    case M_COLMAK_SWAP: {
+      if (record->event.pressed) {
+        if (default_layer_state == 1UL << LAYER_BASE_COLMAK_DH) {
+          persistent_default_layer_set(1UL << LAYER_BASE);
+        } else {
+          persistent_default_layer_set(1UL << LAYER_BASE_COLMAK_DH);
+        }
+      }
+      return false;
+    }
     /* dynamically generate these. */
     case M_BRACK_IN_CBR:  /* {} */
       if (record->event.pressed) {
@@ -926,7 +1002,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 /* Runs just one time when the keyboard initializes. */
 void matrix_init_user(void) {
-
+#ifdef CFQ_USE_COLEMAK_MOD_DH
+  uint16_t *src;
+  uint16_t *dst;
+  src = (uint16_t *)(void *)&keymaps[LAYER_BASE][0][0];
+  dst = (uint16_t *)(void *)&keymaps[LAYER_BASE_COLMAK_DH][0][0];
+  /* Load keys from a COLMAK-DH. */
+  for (int row = 0; row < MATRIX_ROWS; row++) {
+    for (int col = 0; col < MATRIX_COLS; col++) {
+      if (*dst == KC_TRNS) {
+        *dst = *src;
+      }
+      src++;
+      dst++;
+    }
+  }
+#endif
 }
 
 /* Runs constantly in the background, in a loop. */
