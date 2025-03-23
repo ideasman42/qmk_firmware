@@ -208,15 +208,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|       |------+------+------+------+------+------|
  * | Esc  |   A  |   S  |   D  |   F  |   G  |       |   H  |   J  |   K  |   L  |  ;   |  '   |
  * |------+------+------+------+------+------|       |------+------+------+------+------+------|
- * |Shift |   Z  |   X  |   C  |   V  |   B  |       |   N  |   M  |   ,  |   .  |  /   | Delt |
+ * |LShift|   Z  |   X  |   C  |   V  |   B  |       |   N  |   M  |   ,  |   .  |  /   | Delt |
  * '------+------+------+------+------+------'       '------+------+------+------+------+------'
- *               |SPTT_A|SPTT_B|                                   |   ?  |   ?  |
+ *               | LGui |CapsLk|                                   | PgDn | PgUp |
  *               '-------------'                                   '-------------'
  *
  *               .------+------. .-------------.   .-------------. .------+------.
- *               |Space |   (  | |   [  | Alt/{|   |}/~L4 |  ]   | |  )   |Enter |
+ *               |Space |   (  | |   [  | Alt/{|   |  }   |  ]   | |  )   |Enter |
  *               '-------------' |------+------|   |------+------| '-------------'
- *                               |L1/Hom| Ctrl |   | LGui |L2/End|
+ *                               |L1/Hom| Ctrl |   |  L4  |L2/End|
  *                               '-------------'   '-------------'
  */
   [LAYER_BASE] = LAYOUT_5x6(
@@ -224,10 +224,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          KC_TAB,           KC_Q,           KC_W,           KC_E,           KC_R,           KC_T, /*  */           KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,        KC_BSLS,
          KC_ESC,           KC_A,           KC_S,           KC_D,           KC_F,           KC_G, /*  */           KC_H,           KC_J,           KC_K,           KC_L,        KC_SCLN,        KC_QUOT,
         KC_LSFT,           KC_Z,           KC_X,           KC_C,           KC_V,           KC_B, /*  */           KC_N,           KC_M,        KC_COMM,         KC_DOT,        KC_SLSH,         KC_DEL,
-                                 M_SPEECH2TXT_A, M_SPEECH2TXT_B,                                 /*  */                                         KC_STOP,       KC_EXEC,
+                                        KC_LGUI,   KC_CAPS_LOCK,                                 /*  */                                        KC_PGDN,        KC_PGUP,
                                                                          KC_SPC,        KC_LPRN, /*  */        KC_RPRN,         KC_ENT,
-                                                                        KC_LBRC,        KC_LALT, /*  */ MO(LAYER_FKEY),        KC_RBRC,
-                                                                 MO(LAYER_KPAD),        KC_LCTL, /*  */        KC_LGUI,  MO(LAYER_DIRS)
+                                                                        KC_LBRC,        KC_LALT, /*  */        KC_RCBR,        KC_RBRC,
+                                                                 MO(LAYER_KPAD),        KC_LCTL, /*  */ MO(LAYER_FKEY),  MO(LAYER_DIRS)
   ),
 
 /* Keymap 2: FKeys, macro, media & mouse keys
@@ -401,7 +401,9 @@ static struct {
         if (_real_mods & MOD_BIT(KC_RSFT)) {     \
             SEND_STRING(SS_UP(X_RIGHT_SHIFT));   \
         }                                        \
-        { __VA_ARGS__ }                          \
+        {                                        \
+            __VA_ARGS__                          \
+        }                                        \
         if (_real_mods & MOD_BIT(KC_LSFT)) {     \
             SEND_STRING(SS_DOWN(X_LEFT_SHIFT));  \
         }                                        \
@@ -469,13 +471,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     SEND_STRING(SS_TAP(X_HOME));
                     return true;
                 }
-            } else if (keycode == MO(LAYER_FKEY)) {
-                if (layer_state_is(LAYER_KPAD)) {
-                    SEND_STRING("}{" SS_TAP(X_LEFT));
-                    return true;
-                }
-                SEND_STRING("}");
-                return true;
             } else if (keycode == MO(LAYER_DIRS)) {
                 if ((layer_state & ~(1UL << LAYER_DIRS)) == 0) {
                     SEND_STRING(SS_TAP(X_END));
