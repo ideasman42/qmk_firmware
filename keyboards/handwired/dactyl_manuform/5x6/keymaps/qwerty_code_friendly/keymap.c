@@ -202,15 +202,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
  * .-----------------------------------------.       .-----------------------------------------.
- * | Grv  |   !  |   @  |   #  |   $  |   %  |       |   ^  |   &  |   *  |   -  |   =  |BSpace|
+ * | Grv  |   !  |   @  |   #  |   $  |   %  |       |   ^  |   &  |   *  |   -  |   =  |CapsLk|
  * |------+------+------+------+------+------|       |------+------+------+------+------+------|
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |       |   Y  |   U  |   I  |   O  |   P  |  \   |
  * |------+------+------+------+------+------|       |------+------+------+------+------+------|
  * | Esc  |   A  |   S  |   D  |   F  |   G  |       |   H  |   J  |   K  |   L  |  ;   |  '   |
  * |------+------+------+------+------+------|       |------+------+------+------+------+------|
- * |Shift |   Z  |   X  |   C  |   V  |   B  |       |   N  |   M  |   ,  |   .  |  /   | Delt |
+ * |Shift |   Z  |   X  |   C  |   V  |   B  |       |   N  |   M  |   ,  |   .  |  /   |Shift |
  * '------+------+------+------+------+------'       '------+------+------+------+------+------'
- *               |SPTT_A|CapsLk|                                   | PgDn | PgUp |
+ *               | PgDn | PgUp |                                   |BSpace| Delt |
  *               '-------------'                                   '-------------'
  *
  *               .------+------. .-------------.   .-------------. .------+------.
@@ -220,11 +220,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                               '-------------'   '-------------'
  */
   [LAYER_BASE] = LAYOUT_5x6(
-         KC_GRV,        KC_EXLM,          KC_AT,        KC_HASH,         KC_DLR,        KC_PERC, /*  */        KC_CIRC,        KC_AMPR,        KC_ASTR,        KC_MINS,         KC_EQL,        KC_BSPC,
+         KC_GRV,        KC_EXLM,          KC_AT,        KC_HASH,         KC_DLR,        KC_PERC, /*  */        KC_CIRC,        KC_AMPR,        KC_ASTR,        KC_MINS,         KC_EQL,        KC_CAPS_LOCK,
          KC_TAB,           KC_Q,           KC_W,           KC_E,           KC_R,           KC_T, /*  */           KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,        KC_BSLS,
          KC_ESC,           KC_A,           KC_S,           KC_D,           KC_F,           KC_G, /*  */           KC_H,           KC_J,           KC_K,           KC_L,        KC_SCLN,        KC_QUOT,
-        KC_LSFT,           KC_Z,           KC_X,           KC_C,           KC_V,           KC_B, /*  */           KC_N,           KC_M,        KC_COMM,         KC_DOT,        KC_SLSH,         KC_DEL,
-                                 M_SPEECH2TXT_A,   KC_CAPS_LOCK,                                 /*  */                                        KC_PGDN,        KC_PGUP,
+        KC_LSFT,           KC_Z,           KC_X,           KC_C,           KC_V,           KC_B, /*  */           KC_N,           KC_M,        KC_COMM,         KC_DOT,        KC_SLSH,        KC_RSFT,
+                                        KC_PGDN,        KC_PGUP,                                 /*  */                                        KC_BSPC,         KC_DEL,
                                                                          KC_SPC,        KC_LPRN, /*  */        KC_RPRN,         KC_ENT,
                                                                         KC_LBRC,        KC_LALT, /*  */ MO(LAYER_FKEY),        KC_RBRC,
                                                                  MO(LAYER_KPAD),        KC_LCTL, /*  */        KC_LGUI,  MO(LAYER_DIRS)
@@ -325,13 +325,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 4: F-Keys
  *
  * .-----------------------------------------.       .-----------------------------------------.
- * |      |      |      |      |      |      |       |      |  F10 |  F11 |  F12 |      |      |
+ * |      |      | F22  | F23  | F24  |      |       |      |  F10 |  F11 |  F12 |      |      |
  * |------+------+------+------+------+------|       |------+------+------+------+------+------|
- * |      |      |      |      |      |      |       |      |  F7  |  F8  |  F9  |      |      |
+ * |      |      | F19  | F20  | F21  |      |       |      |  F7  |  F8  |  F9  |      |      |
  * |------+------+------+------+------+------|       |------+------+------+------+------+------|
- * |      |      |      |      |      |      |       |      |  F4  |  F5  |  F6  |      |      |
+ * |      |      | F16  | F17  | F18  |      |       |      |  F4  |  F5  |  F6  |      |      |
  * |------+------+------+------+------+------|       |------+------+------+------+------+------|
- * |      |      |      |      |      |      |       |      |  F1  |  F2  |  F3  |      |      |
+ * |      |      | F13  | F14  | F15  |      |       |      |  F1  |  F2  |  F3  |      |      |
  * |------+------+------+------+------+------'       '------+------+------+------+------+------|
  * |      |      |      |      |      |                     |      |      |      |      |      |
  * '----------------------------------'                     '----------------------------------'
@@ -342,10 +342,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                               '-------------'   '-------------'
  */
   [LAYER_FKEY] = LAYOUT_5x6(
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS, /* */        KC_TRNS,         KC_F10,         KC_F11,         KC_F12,        KC_TRNS,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS, /* */        KC_TRNS,          KC_F7,          KC_F8,          KC_F9,        KC_TRNS,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS, /* */        KC_TRNS,          KC_F4,          KC_F5,          KC_F6,        KC_TRNS,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS, /* */        KC_TRNS,          KC_F1,          KC_F2,          KC_F3,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_F22,         KC_F23,         KC_F24,         KC_TRNS, /* */        KC_TRNS,         KC_F10,         KC_F11,         KC_F12,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_F19,         KC_F20,         KC_F21,         KC_TRNS, /* */        KC_TRNS,          KC_F7,          KC_F8,          KC_F9,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_F16,         KC_F17,         KC_F18,         KC_TRNS, /* */        KC_TRNS,          KC_F4,          KC_F5,          KC_F6,        KC_TRNS,        KC_TRNS,
+        KC_TRNS,        KC_TRNS,        KC_F13,         KC_F14,         KC_F15,         KC_TRNS, /* */        KC_TRNS,          KC_F1,          KC_F2,          KC_F3,        KC_TRNS,        KC_TRNS,
                                         KC_TRNS,        KC_TRNS,                                 /* */                                        KC_TRNS,        KC_TRNS,
                                                                         KC_TRNS,        KC_TRNS, /* */        KC_TRNS,        KC_TRNS,
                                                                         KC_TRNS,        KC_TRNS, /* */        KC_TRNS,        KC_TRNS,
@@ -401,7 +401,9 @@ static struct {
         if (_real_mods & MOD_BIT(KC_RSFT)) {     \
             SEND_STRING(SS_UP(X_RIGHT_SHIFT));   \
         }                                        \
-        { __VA_ARGS__ }                          \
+        {                                        \
+            __VA_ARGS__                          \
+        }                                        \
         if (_real_mods & MOD_BIT(KC_LSFT)) {     \
             SEND_STRING(SS_DOWN(X_LEFT_SHIFT));  \
         }                                        \
@@ -734,12 +736,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed && (keyboard_report->mods & (MOD_BIT(KC_RSFT)))) {
                 WITHOUT_MODS({ SEND_STRING("''" SS_TAP(X_LEFT) SS_DOWN(X_RIGHT_SHIFT) SS_DOWN(X_LEFT_SHIFT)); });
                 return false;
-                break;
-                case KC_RIGHT_SHIFT: /* "" */
-                    if (record->event.pressed && (keyboard_report->mods & (MOD_BIT(KC_LSFT)))) {
-                        WITHOUT_MODS({ SEND_STRING("\x22\x22" SS_TAP(X_LEFT) SS_DOWN(X_LEFT_SHIFT) SS_DOWN(X_RIGHT_SHIFT)); });
-                    }
-                    return false;
+            }
+            break;
+        }
+        case KC_RIGHT_SHIFT: { /* "" */
+            if (record->event.pressed && (keyboard_report->mods & (MOD_BIT(KC_LSFT)))) {
+                WITHOUT_MODS({ SEND_STRING("\x22\x22" SS_TAP(X_LEFT) SS_DOWN(X_LEFT_SHIFT) SS_DOWN(X_RIGHT_SHIFT)); });
+                return false;
             }
             break;
         }
